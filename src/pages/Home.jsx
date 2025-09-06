@@ -3,22 +3,62 @@ import Navbar from '../components/Navbar';
 import InfoCards from "../components/InfoCards";
 import CourseDetails from "../components/CourseDetails";
 import ServicesComponent from "../components/ServicesComponent";
+import AboutComponent from "../components/AboutComponent";
+import AchievementSection from "../components/Achievements";
 
 const Home = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    // Add SEO-friendly title and meta description dynamically
-    document.title = "Holy Vision Technical Campus | Best Healthcare College in Nepal";
-    const metaDescription = document.querySelector("meta[name='description']") || document.createElement("meta");
-    metaDescription.name = "description";
-    metaDescription.content = "Holy Vision Technical Campus (HVTC) - CTEVT-affiliated technical education leader in Nepal, offering Nursing, Pharmacy, and General Medicine programs since 2002.";
-    document.head.appendChild(metaDescription);
+ useEffect(() => {
+  // Page title
+  const title = "National Integrated College (NIC) | BSW, BCA & BBS Programs in Nepal";
+  document.title = title;
 
-    const metaKeywords = document.querySelector("meta[name='keywords']") || document.createElement("meta");
-    metaKeywords.name = "keywords";
-    metaKeywords.content = "Holy Vision, HVTC, best college in Nepal, Nursing Nepal, Pharmacy Nepal, General Medicine College, CTEVT, Kathmandu college, healthcare education";
-    document.head.appendChild(metaKeywords);
-  }, []);
+  // Helper to create/update meta tags
+  const upsertMeta = (key, content, attr = "name") => {
+    if (!content) return;
+    let el = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, key);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", content);
+  };
+
+  const desc =
+    "National Integrated College (NIC) — undergraduate programs in BSW, BCA and BBS with industry-aligned curriculum, experienced faculty, scholarships and strong career support.";
+
+  // Core SEO
+  upsertMeta("description", desc);
+  upsertMeta(
+    "keywords",
+    "NIC, National Integrated College, BSW, BCA, BBS, Nepal college, undergraduate programs, admissions, scholarships, placements"
+  );
+  upsertMeta("robots", "index, follow");
+
+  // Open Graph
+  upsertMeta("og:title", title, "property");
+  upsertMeta("og:description", desc, "property");
+  upsertMeta("og:type", "website", "property");
+  upsertMeta("og:url", window.location.href, "property");
+  // If you have a public logo/banner URL, uncomment and set it:
+  // upsertMeta("og:image", `${window.location.origin}/logo.jpg`, "property");
+
+  // Twitter
+  upsertMeta("twitter:card", "summary_large_image");
+  upsertMeta("twitter:title", title);
+  upsertMeta("twitter:description", desc);
+  // upsertMeta("twitter:image", `${window.location.origin}/logo.jpg`);
+
+  // Canonical
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.setAttribute("rel", "canonical");
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute("href", window.location.origin + window.location.pathname);
+}, []);
+
 
   return (
     <div>
@@ -29,6 +69,7 @@ const Home = () => {
         <InfoCards/>
         <CourseDetails/>
         <ServicesComponent/>
+            <AchievementSection />
       </div>
     </div>
   );
