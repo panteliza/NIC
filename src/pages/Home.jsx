@@ -3,8 +3,9 @@ import Navbar from '../components/Navbar';
 import InfoCards from "../components/InfoCards";
 import CourseDetails from "../components/CourseDetails";
 import ServicesComponent from "../components/ServicesComponent";
-import AboutComponent from "../components/AboutComponent";
+
 import AchievementSection from "../components/Achievements";
+import FAQComponent from '../components/FAQs';
 
 const Home = () => {
  useEffect(() => {
@@ -70,6 +71,7 @@ const Home = () => {
         <CourseDetails/>
         <ServicesComponent/>
             <AchievementSection />
+            <FAQComponent/>
       </div>
     </div>
   );
