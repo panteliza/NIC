@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Navbar from '../components/Navbar';
 import InfoCards from "../components/InfoCards";
+import CourseDetails from "../components/CourseDetails";
+import ServicesComponent from "../components/ServicesComponent";
 
 const Home = () => {
   useEffect(() => {
@@ -25,6 +27,8 @@ const Home = () => {
       </div>
       <div className="w-full flex-shrink-0 overflow-hidden">
         <InfoCards/>
+        <CourseDetails/>
+        <ServicesComponent/>
       </div>
     </div>
   );
