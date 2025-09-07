@@ -6,6 +6,8 @@ import ServicesComponent from "../components/ServicesComponent";
 
 import AchievementSection from "../components/Achievements";
 import FAQComponent from '../components/FAQs';
+import BoardOfDirectors from "../components/BoardOfDirectors";
+import DirectContactUs from "../components/DirectContactUs";
 
 const Home = () => {
  useEffect(() => {
@@ -72,6 +74,8 @@ const Home = () => {
         <ServicesComponent/>
             <AchievementSection />
             <FAQComponent/>
+            <BoardOfDirectors/>
+            <DirectContactUs/>
       </div>
     </div>
   );
