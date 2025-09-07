@@ -19,9 +19,9 @@ import slide4 from "../assets/bws.jpg";
 
 // NAV DATA
 const abroad = [
-  { path: "/bsw", label: "BSW" },
-  { path: "/bbs", label: "BBS" },
-  { path: "/bca", label: "BCA" },
+  { path: "/bsw", label: "Bachelor in Social Work (BSW)" },
+  { path: "/bbs", label: " Bachelor in Business Studies (BBS)" },
+  { path: "/bca", label: "Bachelor in Computer Application (BCA)" },
 ];
 
 const navLinks = [
@@ -227,7 +227,7 @@ export default function NavbarWithSliderOverlay() {
                 onClick={closeSidebar}
               >
                 <span>Home</span>
-                <span className="text-xs text-white/60 group-hover:text-white/90">⌂</span>
+              
               </Link>
 
               <Link
@@ -236,7 +236,7 @@ export default function NavbarWithSliderOverlay() {
                 onClick={closeSidebar}
               >
                 <span>About</span>
-                <span className="text-xs text-white/60 group-hover:text-white/90">ℹ️</span>
+               
               </Link>
 
               {/* Courses dropdown */}
@@ -269,7 +269,7 @@ export default function NavbarWithSliderOverlay() {
               <div className="flex items-center justify-between">
                 <div className="flex gap-3">
                   <a
-                    href="https://www.facebook.com/share/1DvKTYh2j5/?mibextid=wwXIfr"
+                    href="https://www.facebook.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 transition"
@@ -277,7 +277,7 @@ export default function NavbarWithSliderOverlay() {
                     <img src={img1} alt="Facebook" className="h-5 w-5 object-contain" />
                   </a>
                   <a
-                    href="https://www.google.com/maps/place/Holy+Vision+Technical+Campus/@27.6907731,85.3335731,17.75z/data=!4m6!3m5!1s0x39eb19957c935b35:0x75b06ec216c597d5!8m2!3d27.691029!4d85.3336338!16s%2Fg%2F11b6gdw10d?entry=ttu&g_ep=EgoyMDI1MDQwMi4xIKXMDSoASAFQAw%3D%3D"
+                    href="https://www.google.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 transition"
@@ -285,7 +285,7 @@ export default function NavbarWithSliderOverlay() {
                     <img src={img2} alt="Map" className="h-5 w-5 object-contain" />
                   </a>
                   <a
-                    href="https://wa.me/+9779801125262"
+                    href="https://wa.me/+9779800000000"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 transition"
@@ -294,13 +294,7 @@ export default function NavbarWithSliderOverlay() {
                   </a>
                 </div>
 
-                <Link
-                  to="/contact"
-                  onClick={closeSidebar}
-                  className="px-3 py-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-semibold shadow-lg hover:shadow-cyan-500/30 transition-all"
-                >
-                  Contact
-                </Link>
+              
               </div>
             </div>
           </aside>
