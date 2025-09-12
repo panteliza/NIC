@@ -11,6 +11,7 @@ import DirectContactUs from "../components/DirectContactUs";
 import Reviews from "../components/Reviews";
 import Footer from "../components/Footer";
 
+
 const Home = () => {
  useEffect(() => {
   // Page title
@@ -78,6 +79,7 @@ const Home = () => {
             <FAQComponent/>
             <BoardOfDirectors/>
             <DirectContactUs/>
+        
             <Reviews/>
             <Footer/>
       </div>
