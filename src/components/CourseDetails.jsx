@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // === IMAGES ===
-import bswImg from "../assets/bws.jpg";      // BSW hero image
-import bcaImg from "../assets/bca.png";      // BCA hero image
-import bbsImg from "../assets/bbs.png";      // BBS hero image
+import bswImg from "../assets/bws.webp";      // BSW hero image
+import bcaImg from "../assets/bca.webp";      // BCA hero image
+import bbsImg from "../assets/bbs.webp";      // BBS hero image
 
 
 // === ICONS (small round) ===

@@ -13,9 +13,9 @@ import img1 from "../assets/facebook.png";
 import img2 from "../assets/googlemap.png";
 import img3 from "../assets/whatsapp.png";
 
-import slide2 from "../assets/bbs.png";
-import slide3 from "../assets/bca.png";
-import slide4 from "../assets/bws.jpg";
+import slide2 from "../assets/bbs.webp";
+import slide3 from "../assets/bca.webp";
+import slide4 from "../assets/bws.webp";
 
 // NAV DATA
 const abroad = [

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import graduateImg from "../assets/bws.jpg";      // keep
-import groupStudentsImg from "../assets/bca.png"; // keep
+import graduateImg from "../assets/bws.webp";      // keep
+import groupStudentsImg from "../assets/bca.webp"; // keep
 
 const ServicesComponent = () => {
   useEffect(() => {
