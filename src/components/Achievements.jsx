@@ -35,7 +35,7 @@ const CountUp = ({ end, suffix, triggerKey }) => {
       : count.toFixed(2);
 
   return (
-    <span className="text-slate-900 text-3xl font-extrabold">
+    <span className="text-slate-900 text-[clamp(1.25rem,2.5vw,1.75rem)] font-extrabold">
       {display}{suffix}
     </span>
   );
@@ -46,20 +46,31 @@ const AchievementCard = ({ icon, label, value, suffix, color, delay }) => {
   const [countKey, setCountKey] = useState(0);
   return (
     <motion.div
-      className="relative w-full max-w-[180px] h-[200px] mx-auto transform hover:scale-105 transition-transform"
+      className="
+        relative w-full
+        max-w-[150px] xs:max-w-[160px] sm:max-w-[180px]
+        h-[170px] xs:h-[180px] sm:h-[200px]
+        mx-auto
+        transition-transform
+        md:hover:scale-105
+      "
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ amount: 0.5 }}
+      viewport={{ amount: 0.5, once: false }}
       transition={{ duration: 0.5, delay }}
       onViewportEnter={() => setCountKey((k) => k + 1)}
     >
       {/* diamond bg */}
       <div className="absolute inset-0 rotate-45 rounded-xl shadow-xl bg-gradient-to-br from-white to-slate-50" />
       {/* upright content */}
-      <div className="absolute inset-0 -rotate-45 flex flex-col items-center justify-center">
-        <div className={`p-4 rounded-full shadow mb-3 text-white ${color}`}>{icon}</div>
-        <h3 className="text-xs font-medium text-slate-600 text-center">{label}</h3>
-        <div className="mt-2">
+      <div className="absolute inset-0 -rotate-45 flex flex-col items-center justify-center px-3 text-center">
+        <div className={`p-3 sm:p-4 rounded-full shadow mb-2 sm:mb-3 text-white ${color}`}>
+          {icon}
+        </div>
+        <h3 className="text-[11px] sm:text-xs font-medium text-slate-600 leading-snug">
+          {label}
+        </h3>
+        <div className="mt-1.5 sm:mt-2">
           <CountUp end={value} suffix={suffix} triggerKey={countKey} />
         </div>
       </div>
@@ -68,32 +79,44 @@ const AchievementCard = ({ icon, label, value, suffix, color, delay }) => {
 };
 
 const AchievementSection = () => {
+  // Determine density based on viewport (runs once; simple & cheap)
+  const [density, setDensity] = useState({ bubbles: 16, drops: 10 });
+  useEffect(() => {
+    const w = window.innerWidth;
+    if (w < 400) setDensity({ bubbles: 10, drops: 6 });
+    else if (w < 640) setDensity({ bubbles: 12, drops: 8 });
+    else if (w < 1024) setDensity({ bubbles: 16, drops: 10 });
+    else setDensity({ bubbles: 22, drops: 16 });
+  }, []);
+
   /* generate once per mount for stable positions/timing */
   const bubbles = useMemo(() => {
-    const N = 22;
+    const N = density.bubbles;
     return Array.from({ length: N }, () => ({
       left: Math.random() * 100,                    // %
       size: 8 + Math.random() * 18,                 // px
-      duration: 14 + Math.random() * 18,            // s
+      duration: 16 + Math.random() * 20,            // s (a bit longer for smoothness on phones)
       delay: -Math.random() * 20,                   // s (negative to desync)
       opacity: 0.08 + Math.random() * 0.10,
       sway: 4 + Math.random() * 10,                 // px
     }));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [density.bubbles]);
 
   const drops = useMemo(() => {
-    const N = 16;
+    const N = density.drops;
     return Array.from({ length: N }, () => ({
       left: Math.random() * 100,
       length: 18 + Math.random() * 28,              // px
-      duration: 8 + Math.random() * 10,             // s
+      duration: 9 + Math.random() * 11,             // s
       delay: -Math.random() * 12,                   // s
       opacity: 0.10 + Math.random() * 0.10,
     }));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [density.drops]);
 
   return (
-    <section className="relative overflow-hidden py-14 px-4 text-center">
+    <section className="relative overflow-hidden py-10 sm:py-14 px-3 sm:px-4 text-center">
       {/* Layered, premium background + bubbles & raindrops */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* 1) Deep navy base */}
@@ -101,18 +124,18 @@ const AchievementSection = () => {
 
         {/* 2) Isometric grid (very faint) */}
         <div
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.06] max-sm:opacity-[0.04]"
           style={{
             backgroundImage:
               "linear-gradient(30deg, #ffffff 1px, transparent 1px), linear-gradient(150deg, #ffffff 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
+            backgroundSize: "24px 24px",
             backgroundPosition: "center",
           }}
         />
 
         {/* 3) Sliding ribbon (diagonal sheen) */}
         <div
-          className="absolute -top-24 left-[-10%] w-[120%] h-40 opacity-[0.08]"
+          className="absolute -top-24 left-[-10%] w-[120%] h-32 sm:h-40 opacity-[0.08] max-sm:opacity-[0.06]"
           style={{
             background:
               "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(148,163,184,0.45) 50%, rgba(255,255,255,0) 100%)",
@@ -122,11 +145,11 @@ const AchievementSection = () => {
         />
 
         {/* 4) Contour lines */}
-        <svg className="absolute top-10 left-6 w-[460px] h-[260px] opacity-[0.14]" viewBox="0 0 460 260" fill="none">
+        <svg className="absolute top-6 sm:top-10 left-2 sm:left-6 w-[300px] sm:w-[460px] h-[170px] sm:h-[260px] opacity-[0.14] max-sm:opacity-[0.10]" viewBox="0 0 460 260" fill="none">
           <path className="dash" d="M0 180 Q 115 70 230 180 T 460 180" stroke="#9fb0c3" strokeWidth="1.2" />
           <path className="dash" d="M0 120 Q 115 10 230 120 T 460 120" stroke="#9fb0c3" strokeWidth="1.2" />
         </svg>
-        <svg className="absolute -bottom-6 -right-2 w-[520px] h-[280px] opacity-[0.12]" viewBox="0 0 520 280" fill="none" style={{ transform: "rotate(180deg)" }}>
+        <svg className="absolute -bottom-6 -right-2 w-[320px] sm:w-[520px] h-[180px] sm:h-[280px] opacity-[0.12] max-sm:opacity-[0.08]" viewBox="0 0 520 280" fill="none" style={{ transform: "rotate(180deg)" }}>
           <path className="dash" d="M0 200 Q 130 90 260 200 T 520 200" stroke="#8ca0b3" strokeWidth="1.2" />
           <path className="dash" d="M0 140 Q 130 30 260 140 T 520 140" stroke="#8ca0b3" strokeWidth="1.2" />
         </svg>
@@ -142,16 +165,16 @@ const AchievementSection = () => {
         {/* 6) Floating orbs */}
         <div className="orb orb1" />
         <div className="orb orb2" />
-        <div className="orb orb3" />
+        <div className="orb orb3 max-sm:hidden" /> {/* hide one on very small screens */}
 
         {/* 7) Bubbles (soft circles, drift down + sway) */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]">
           {bubbles.map((b, i) => (
             <span
               key={`b-${i}`}
               className="bubble"
               style={{
-                "--left": `${b.left}%`,
+                left: `${b.left}%`,
                 "--size": `${b.size}px`,
                 "--dur": `${b.duration}s`,
                 "--delay": `${b.delay}s`,
@@ -165,13 +188,13 @@ const AchievementSection = () => {
         </div>
 
         {/* 8) Raindrop streaks (thin lines falling) */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
           {drops.map((d, i) => (
             <span
               key={`d-${i}`}
               className="drop"
               style={{
-                "--left": `${d.left}%`,
+                left: `${d.left}%`,
                 "--len": `${d.length}px`,
                 "--dur": `${d.duration}s`,
                 "--delay": `${d.delay}s`,
@@ -183,7 +206,7 @@ const AchievementSection = () => {
       </div>
 
       <motion.h2
-        className="text-4xl font-bold mb-3 text-white"
+        className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold mb-2 sm:mb-3 text-white"
         initial={{ opacity: 0, y: -18 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55 }}
@@ -192,12 +215,19 @@ const AchievementSection = () => {
         NIC <span className="text-slate-300">Achievements</span>
       </motion.h2>
 
-      <p className="max-w-3xl mx-auto text-slate-300/90 mb-12">
+      <p className="max-w-3xl mx-auto text-slate-300/90 mb-8 sm:mb-12 text-[clamp(.9rem,2.3vw,1rem)] px-2">
         Steady outcomes, experienced mentors, and strong linkages across BSW, BCA and BBS.
       </p>
 
-      {/* Cards (no box behind) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 max-w-6xl mx-auto">
+      {/* Cards */}
+      <div
+        className="
+          grid
+          grid-cols-2 xs:grid-cols-3 md:grid-cols-5
+          gap-4 xs:gap-6 md:gap-8
+          max-w-6xl mx-auto
+        "
+      >
         {stats.map((item, i) => (
           <AchievementCard key={i} {...item} delay={i * 0.08} />
         ))}
@@ -205,6 +235,16 @@ const AchievementSection = () => {
 
       {/* Animations + helpers */}
       <style>{`
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .dash,
+          .orb,
+          .bubble,
+          .drop {
+            animation: none !important;
+          }
+        }
+
         /* ribbon motion */
         @keyframes slideRibbon {
           0% { transform: translateX(-8%) rotate(-6deg); }
@@ -216,10 +256,15 @@ const AchievementSection = () => {
         @keyframes dash { to { stroke-dashoffset: -220; } }
 
         /* soft floating orbs */
-        .orb { position:absolute; border-radius:9999px; filter: blur(36px); background: radial-gradient(circle at 30% 30%, rgba(148,163,184,.28), rgba(2,6,23,0) 60%); opacity:.18; }
-        .orb1 { width:420px;height:420px;left:-120px;top:-80px; animation: floatA 22s ease-in-out infinite alternate; }
-        .orb2 { width:380px;height:380px;right:-120px;top:18%;   animation: floatB 26s ease-in-out infinite alternate; opacity:.14; }
-        .orb3 { width:460px;height:460px;left:25%;bottom:-160px; animation: floatC 24s ease-in-out infinite alternate; opacity:.12; }
+        .orb { position:absolute; border-radius:9999px; filter: blur(28px); background: radial-gradient(circle at 30% 30%, rgba(148,163,184,.28), rgba(2,6,23,0) 60%); opacity:.18; }
+        .orb1 { width:340px;height:340px;left:-100px;top:-60px; animation: floatA 22s ease-in-out infinite alternate; }
+        .orb2 { width:300px;height:300px;right:-100px;top:18%;   animation: floatB 26s ease-in-out infinite alternate; opacity:.14; }
+        .orb3 { width:380px;height:380px;left:25%;bottom:-130px; animation: floatC 24s ease-in-out infinite alternate; opacity:.12; }
+        @media (min-width: 640px) {
+          .orb1 { width:420px;height:420px;left:-120px;top:-80px; }
+          .orb2 { width:380px;height:380px;right:-120px; }
+          .orb3 { width:460px;height:460px;bottom:-160px; }
+        }
         @keyframes floatA { from { transform: translateY(0) translateX(0) } to { transform: translateY(24px) translateX(20px) } }
         @keyframes floatB { from { transform: translateY(10px) translateX(0) } to { transform: translateY(-20px) translateX(-24px) } }
         @keyframes floatC { from { transform: translateY(0) } to { transform: translateY(-22px) } }
@@ -228,7 +273,6 @@ const AchievementSection = () => {
         .bubble {
           position:absolute;
           top:-12vh;
-          left: var(--left);
           animation: drop var(--dur) linear infinite;
           animation-delay: var(--delay);
           will-change: transform, opacity;
@@ -256,7 +300,6 @@ const AchievementSection = () => {
         .drop {
           position:absolute;
           top:-15vh;
-          left: var(--left);
           width: 2px;
           height: var(--len);
           background: linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.05));
