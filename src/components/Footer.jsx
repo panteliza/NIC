@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import logo from "../assets/logo.png";      // <- replace if you have an NIC logo
-import bgImage from "../assets/finalfooter.jpg";   // <- ensure this exists
+import bgImage from "../assets/finalfooter.webp";   // <- ensure this exists
 
 const Footer = () => {
   return (
