@@ -18,7 +18,7 @@ import {
 
 import logo from "../assets/logo.png"; // NIC logo
 
-// ------- MENU (edit labels/paths as needed) -------
+// ------- MENU -------
 const MENU = [
   { label: "Academic Calendar +2", to: "/calendar" },
   { label: "Club Membership", to: "/clubs" },
@@ -39,14 +39,14 @@ const MENU = [
 ];
 
 export default function Navbar() {
-  const [collapsed, setCollapsed] = useState(false); // desktop collapse -> floating minimizer
-  const [drawerOpen, setDrawerOpen] = useState(false); // mobile drawer
+  const [collapsed, setCollapsed] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(true); // 👈 open by default on mobile
   const [openAcc, setOpenAcc] = useState({});
   const { pathname } = useLocation();
 
-  // close mobile on route change
+  // keep sidebar open on mobile after route change
   useEffect(() => {
-    setDrawerOpen(false);
+    setDrawerOpen(true);
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -64,13 +64,13 @@ export default function Navbar() {
     soft: "#E6F2FB",
   };
 
-  // ------- Reusable panel (desktop & mobile) -------
+  // ------- Sidebar Panel -------
   const Panel = ({ mobile = false }) => (
     <aside
       className={
         mobile
-          ? "h-full w-[86%] max-w-[368px] bg-white rounded-r-2xl shadow-xl overflow-hidden"
-          : `w-[286px] ${collapsed ? "md:w-[86px]" : ""} bg-white/95 rounded-r-2xl shadow-xl overflow-hidden`
+          ? "h-full w-[86%] max-w-[368px] bg-white rounded-r-2xl shadow-xl overflow-hidden flex flex-col"
+          : `w-[286px] ${collapsed ? "md:w-[86px]" : ""} bg-white/95 rounded-r-2xl shadow-xl overflow-hidden flex flex-col`
       }
     >
       {/* Header */}
@@ -101,29 +101,41 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* tiny collapse toggle (desktop only) */}
-        {!mobile && (
-          <button
-            onClick={() => setCollapsed((v) => !v)}
-            className="absolute -right-3 top-3 h-7 w-7 grid place-items-center rounded-full bg-white text-[#b10f0f] shadow-lg border border-slate-200"
-            title={collapsed ? "Expand" : "Collapse"}
-          >
-            {collapsed ? "›" : "‹"}
-          </button>
-        )}
-      </div>
-
-      {/* blue strip */}
+       
+      {/* Tagline with shimmer + shine */}
       {!collapsed && (
         <div
-          className="text-[13px] font-medium text-white px-4 py-2"
+          className="relative text-[13px] font-medium italic px-4 py-2 text-center overflow-hidden"
           style={{ backgroundColor: nicBlue.base }}
         >
-          Education for the Future
+          <span className="relative inline-block bg-gradient-to-r from-white via-[#a3d8ff] to-white bg-[length:200%_100%] bg-clip-text text-transparent font-semibold tracking-wide animate-shimmer">
+            Support System that ushers intrinsic motivation in students
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent animate-shine" />
+          </span>
+
+          <style>{`
+            @keyframes shimmer {
+              0% { background-position: -200% 0; }
+              100% { background-position: 200% 0; }
+            }
+            .animate-shimmer {
+              animation: shimmer 6s linear infinite;
+            }
+            @keyframes shine {
+              0%   { transform: translateX(-100%); }
+              50%  { transform: translateX(100%); }
+              100% { transform: translateX(100%); }
+            }
+            .animate-shine {
+              animation: shine 3s ease-in-out infinite;
+              background-size: 50% 100%;
+              mix-blend-mode: screen;
+            }
+          `}</style>
         </div>
       )}
 
-      {/* Search row */}
+      {/* Search */}
       <button
         className="w-full flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-100"
         onClick={() => document.getElementById("site-search")?.focus()}
@@ -132,11 +144,11 @@ export default function Navbar() {
         {!collapsed && <span>Search</span>}
       </button>
 
-      {/* SCROLLABLE MENU AREA */}
+      {/* Scrollable menu */}
       <div
-        className="px-0"
+        className="px-0 nic-scroll flex-1"
         style={{
-          maxHeight: "calc(100vh - 188px)", // header + blue strip + search + socials space
+          maxHeight: "calc(100vh - 188px)",
           overflowY: "auto",
         }}
       >
@@ -159,13 +171,9 @@ export default function Navbar() {
               >
                 <span className="flex-1 text-left">{m.label}</span>
                 {hasKids ? (
-                  open ? (
-                    <FiChevronDown className="shrink-0 opacity-90" />
-                  ) : (
-                    <FiChevronRight className="shrink-0 opacity-90" />
-                  )
+                  open ? <FiChevronDown /> : <FiChevronRight />
                 ) : (
-                  <FiChevronRight className="opacity-0 group-hover:opacity-100 transition" />
+                  <FiChevronRight className="opacity-0 group-hover:opacity-100" />
                 )}
               </Link>
 
@@ -196,7 +204,6 @@ export default function Navbar() {
             rel="noreferrer"
             className="h-9 w-9 grid place-items-center rounded-full text-white"
             style={{ backgroundColor: nicBlue.base }}
-            title="Facebook"
           >
             <FaFacebookF />
           </a>
@@ -206,7 +213,6 @@ export default function Navbar() {
             rel="noreferrer"
             className="h-9 w-9 grid place-items-center rounded-full text-white"
             style={{ backgroundColor: nicBlue.base }}
-            title="Instagram"
           >
             <FaInstagram />
           </a>
@@ -216,7 +222,6 @@ export default function Navbar() {
             rel="noreferrer"
             className="h-9 w-9 grid place-items-center rounded-full text-white"
             style={{ backgroundColor: nicBlue.base }}
-            title="YouTube"
           >
             <FaYoutube />
           </a>
@@ -225,7 +230,6 @@ export default function Navbar() {
             target="_blank"
             rel="noreferrer"
             className="ml-auto h-9 w-9 grid place-items-center rounded-full bg-slate-900 text-white"
-            title="Find us"
           >
             <FaMapMarkerAlt />
           </a>
@@ -234,7 +238,6 @@ export default function Navbar() {
             target="_blank"
             rel="noreferrer"
             className="h-9 w-9 grid place-items-center rounded-full bg-green-600 text-white"
-            title="WhatsApp"
           >
             <FaWhatsapp />
           </a>
@@ -245,42 +248,35 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ===== FLOATING MINIMIZER (Trinity style) - shows when collapsed ===== */}
-      {collapsed && (
-        <button
-          className="fixed top-20 left-3 z-[75] hidden lg:grid place-items-center"
-          onClick={() => setCollapsed(false)}
-          aria-label="Open sidebar"
-          title="Open menu"
-        >
-          <div className="h-12 w-12 rounded-md bg-white shadow-xl grid place-items-center">
-            {/* red hamburger bars */}
-            <div className="space-y-[5px]">
-              <span className="block h-[3px] w-7 rounded bg-[#b10f0f]" />
-              <span className="block h-[3px] w-7 rounded bg-[#b10f0f]" />
-              <span className="block h-[3px] w-7 rounded bg-[#b10f0f]" />
-            </div>
-          </div>
-        </button>
-      )}
+      {/* Scrollbar styles */}
+      <style>{`
+        .nic-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: ${nicBlue.dark} ${nicBlue.soft};
+        }
+        .nic-scroll::-webkit-scrollbar {
+          width: 10px;
+        }
+        .nic-scroll::-webkit-scrollbar-track {
+          background: ${nicBlue.soft};
+        }
+        .nic-scroll::-webkit-scrollbar-thumb {
+          background: ${nicBlue.dark};
+          border-radius: 8px;
+        }
+        .nic-scroll::-webkit-scrollbar-thumb:hover {
+          background: ${nicBlue.base};
+        }
+      `}</style>
 
-      {/* ===== DESKTOP SIDE PANEL ===== */}
+      {/* Desktop sidebar */}
       <div className="hidden lg:block fixed top-0 left-0 z-[60] h-full">
         {!collapsed && <Panel />}
       </div>
 
-      {/* ===== MOBILE HAMBURGER ===== */}
-      <button
-        className="fixed top-4 left-4 z-[70] lg:hidden p-2 rounded-md bg-white/95 shadow"
-        onClick={() => setDrawerOpen(true)}
-        aria-label="Open menu"
-      >
-        <FiMenu className="text-2xl" />
-      </button>
-
-      {/* ===== MOBILE DRAWER ===== */}
+      {/* Mobile drawer (default open) */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-[80]">
+        <div className="fixed inset-0 z-[80] lg:hidden">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setDrawerOpen(false)}
@@ -291,7 +287,14 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* hidden search input (for focus helper) */}
+      {/* Mobile hamburger (still available) */}
+      <button
+        className="fixed top-4 left-4 z-[90] lg:hidden p-2 rounded-md bg-white/90 shadow"
+        onClick={() => setDrawerOpen(true)}
+      >
+        <FiMenu className="text-2xl" />
+      </button>
+
       <input id="site-search" type="text" className="sr-only" aria-hidden="true" />
     </>
   );
