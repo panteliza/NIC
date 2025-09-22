@@ -101,7 +101,18 @@ export default function Navbar() {
           )}
         </div>
 
-       
+        {/* collapse toggle (desktop) */}
+        {!mobile && (
+          <button
+            onClick={() => setCollapsed((v) => !v)}
+            className="absolute -right-3 top-3 h-7 w-7 grid place-items-center rounded-full bg-white text-[#b10f0f] shadow-lg border border-slate-200"
+            title={collapsed ? "Expand" : "Collapse"}
+          >
+            {collapsed ? "›" : "‹"}
+          </button>
+        )}
+      </div>
+
       {/* Tagline with shimmer + shine */}
       {!collapsed && (
         <div
@@ -135,14 +146,7 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Search */}
-      <button
-        className="w-full flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-100"
-        onClick={() => document.getElementById("site-search")?.focus()}
-      >
-        <FiSearch />
-        {!collapsed && <span>Search</span>}
-      </button>
+     
 
       {/* Scrollable menu */}
       <div
