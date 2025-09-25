@@ -1,127 +1,148 @@
+// src/components/FooterNIC.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import logo from "../assets/logo.png";      // <- replace if you have an NIC logo
-import bgImage from "../assets/finalfooter.webp";   // <- ensure this exists
+import logo from "../assets/logo.png";
 
-const Footer = () => {
+export default function FooterNIC() {
   return (
-    <footer className="text-white relative">
-      {/* Background Image Layer */}
+    <footer className="relative text-white">
+      {/* --- DIAMOND PATTERN BACKGROUND --- */}
+      <div className="absolute inset-0 -z-10 bg-[#0b0f14]" />
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        className="absolute inset-0 -z-10 opacity-70"
+        style={{
+          backgroundImage:
+            `url("data:image/svg+xml;utf8,` +
+            encodeURIComponent(
+              `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'>
+                <rect x='10' y='0' width='20' height='20' transform='rotate(45 20 20)' fill='%23131a22'/>
+              </svg>`
+            ) +
+            `")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "40px 40px",
+        }}
       />
 
-      {/* Overlay + Content (NIC blue tint) */}
-      <div className="relative z-10 py-10 px-6 sm:px-12 bg-[rgba(10,31,68,0.75)]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-          {/* About / Logo */}
-          <div>
-            <div className="flex items-center gap-2">
-              <img src={logo} alt="NIC Logo" className="h-[100px] w-[120px] object-contain" />
-            </div>
-            <p className="mt-3 text-sm text-blue-100">
-              National Integrated College (NIC) — Tribhuvan University affiliated.
-              Centrally located at Dillibazar, Kathmandu, Nepal.
-            </p>
-          </div>
-
-          {/* Our Programs (BSW, BCA, BBS) */}
-          <div>
-            <h2 className="text-xl font-bold mb-4">Our Programs</h2>
-            <ul className="space-y-2 text-sm">
-              {[
-                { title: "Bachelor in Social Work (BSW)", link: "/bsw" },
-                { title: "Bachelor in Computer Application (BCA)", link: "/bca" },
-                { title: "Bachelor in Business Studies (BBS)", link: "/bbs" },
-              ].map((course, index) => (
-                <li key={index}>
-                  <Link
-                    to={course.link}
-                    className="hover:text-blue-300 transition-all duration-300"
-                  >
-                    {course.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Helpful Links */}
-          <div>
-            <h2 className="text-xl font-bold mb-4">Helpful Links</h2>
-            <ul className="space-y-2 text-sm">
-              {["About Us", "Contact Us", "Gallery"].map((label, index) => (
-                <li key={index}>
-                  <Link
-                    to={`/${label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="hover:text-blue-300 transition-all duration-300"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info (placeholders—edit to your real details) */}
-          <div>
-            <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-center gap-2">
-                <MdEmail className="text-lg text-blue-300" />
-                <a
-                  href="mailto:admissions@nic.edu.np" // TODO: replace with official email
-                  className="hover:text-blue-300 transition-all duration-300"
-                >
-                  admissions@nic.edu.np
-                </a>
-              </li>
-              <li className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <FaPhoneAlt className="text-lg text-blue-300" />
-                <div className="flex flex-col">
-                  <a
-                    href="tel:+977014234567" // TODO: replace with official phone
-                    className="hover:text-blue-300 transition-all duration-300"
-                  >
-                    +977-01-4234567
-                  </a>
-                  <a
-                    href="tel:+9779800000000" // TODO: replace with official mobile
-                    className="hover:text-blue-300 transition-all duration-300"
-                  >
-                    +977-9800000000
-                  </a>
+      {/* --- CONTENT GRID --- */}
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-12">
+        <div className="grid gap-10 md:gap-12 lg:gap-16 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+          {/* Column 1: NIC Colleges */}
+          <div className="space-y-8">
+            <div>
+              <div className="flex items-center gap-3">
+                <img src={logo} alt="NIC" className="h-12 w-12 object-contain" />
+                <div className="leading-tight">
+                  <div className="text-lg font-semibold">National Integrated</div>
+                  <div className="text-base font-light tracking-wide">College</div>
                 </div>
-              </li>
-              <li className="flex items-center gap-2">
-                <FaMapMarkerAlt className="text-lg text-blue-300" />
-                <span className="hover:text-blue-300 transition-all duration-300">
-                  Dillibazar, Kathmandu, Nepal
-                </span>
-              </li>
+              </div>
+
+              <ul className="mt-4 space-y-2 text-[15px] text-[#b8c2cc]">
+                <li className="flex items-start gap-2">
+                  <FaMapMarkerAlt className="mt-1 text-[#b0ff72]" />
+                  <span>Dillibazar, Kathmandu, Nepal</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <FaPhoneAlt className="mt-1 text-[#b0ff72]" />
+                  <a href="tel:+977014234567" className="hover:text-white">01-4234567</a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <MdEmail className="mt-1 text-[#b0ff72]" />
+                  <a href="mailto:info@nic.edu.np" className="hover:text-white">info@nic.edu.np</a>
+                </li>
+              </ul>
+
+              <div className="mt-4 flex items-center gap-3">
+                <a href="https://facebook.com" target="_blank" rel="noreferrer"
+                   className="h-9 w-9 rounded bg-white/10 grid place-items-center hover:bg-white/20 transition"><FaFacebookF /></a>
+                <a href="https://instagram.com" target="_blank" rel="noreferrer"
+                   className="h-9 w-9 rounded bg-white/10 grid place-items-center hover:bg-white/20 transition"><FaInstagram /></a>
+                <a href="https://youtube.com" target="_blank" rel="noreferrer"
+                   className="h-9 w-9 rounded bg-white/10 grid place-items-center hover:bg-white/20 transition"><FaYoutube /></a>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2: Academic Programs */}
+          <div>
+            <h3 className="text-lg font-bold tracking-wide mb-4">+2 PROGRAMS (NEB)</h3>
+            <ul className="space-y-2 text-[15px] text-[#c7d0d9]">
+              <li><Link to="/plus2-science" className="text-[#9ed0ff] hover:text-white">+2 in Science</Link></li>
+              <li><Link to="/plus2-management" className="text-[#9ed0ff] hover:text-white">+2 in Management</Link></li>
+              <li><Link to="/plus2-law" className="text-[#9ed0ff] hover:text-white">+2 in Law</Link></li>
             </ul>
-            <Link
-              to="/contact"
-              className="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300"
-            >
-              Contact Us
-            </Link>
+
+            <h3 className="text-lg font-bold tracking-wide mt-8 mb-4">BACHELOR PROGRAMS (TU)</h3>
+            <ul className="space-y-2 text-[15px]">
+              <li><Link to="/bca" className="text-[#9ed0ff] hover:text-white">BCA – Bachelor in Computer Application</Link></li>
+              <li><Link to="/bsw" className="text-[#9ed0ff] hover:text-white">BSW – Bachelor in Social Work</Link></li>
+              <li><Link to="/bbs" className="text-[#9ed0ff] hover:text-white">BBS – Bachelor in Business Studies</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Quick Links */}
+          <div>
+            <h3 className="text-lg font-bold tracking-wide mb-4">QUICK LINKS</h3>
+            <ul className="space-y-2 text-[15px]">
+              {[
+                ["About NIC", "/about"],
+                ["Tribhuvan University", "https://tuiost.edu.np"],
+                ["Admissions", "/admission"],
+                ["Programs", "/academics"],
+                ["Alumni", "/alumni"],
+                ["Student Blogs", "/blogs"],
+                ["Gallery", "/gallery"],
+                ["Contact Us", "/contact"],
+              ].map(([label, href]) => (
+                <li key={label}>
+                  {href.startsWith("http") ? (
+                    <a href={href} target="_blank" rel="noreferrer" className="text-[#9ed0ff] hover:text-white">{label}</a>
+                  ) : (
+                    <Link to={href} className="text-[#9ed0ff] hover:text-white">{label}</Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Resources */}
+          <div className="hidden lg:block">
+            <h3 className="text-lg font-bold tracking-wide mb-4">RESOURCES</h3>
+            <ul className="space-y-2 text-[15px]">
+              {[
+                ["Faculty Members", "/faculty"],
+                ["Clubs & Societies", "/clubs"],
+                ["Student Services", "/student-life"],
+                ["Notices", "/notice"],
+                ["Downloads", "/downloads"],
+                ["FAQs", "/faqs"],
+              ].map(([label, href]) => (
+                <li key={label}><Link to={href} className="text-[#9ed0ff] hover:text-white">{label}</Link></li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="relative z-10 bg-[#0a1f44]/90 text-center py-4">
-        <p className="text-sm">
-          © {new Date().getFullYear()} National Integrated College (NIC). All Rights Reserved.
-        </p>
+      {/* --- BOTTOM BAR --- */}
+      <div className="relative border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
+          <div className="flex items-center justify-between py-4 gap-4">
+            <p className="text-sm text-[#b8c2cc]">
+              © {new Date().getFullYear()} National Integrated College (NIC). All rights reserved.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
