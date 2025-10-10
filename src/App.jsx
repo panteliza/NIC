@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import BCA from './pages/BCA';
 import BSW from './pages/BSW';
 import BBS from './pages/BBS';
+import PlusTwoScience from './pages/PlusTwoScience';
+import PlusTwoManagement from './pages/PlusTwoManagement';
 
 
 
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/bca" element={<BCA />} />
           <Route path="/bsw" element={<BSW />} />
           <Route path="/bbs" element={<BBS/>} />
+          <Route path="/plus2-science" element={<PlusTwoScience/>} />
+          <Route path="/plus2-management" element={<PlusTwoManagement/>} />
           
          
         
