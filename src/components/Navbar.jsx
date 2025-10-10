@@ -1,5 +1,5 @@
 // src/components/NICSideNavbar.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FiSearch,
@@ -25,15 +25,19 @@ const MENU = [
   { label: "Grade XI Orientation Program", to: "/orientation" },
   { label: "First Term Exam", to: "/first-term-exam" },
   { label: "About NIC", to: "/about" },
-  {
-    label: "Academic Programs",
-    to: "/academics",
-    children: [
-      { label: "Bachelor in Social Work (BSW)", to: "/bsw" },
-      { label: "Bachelor in Business Studies (BBS)", to: "/bbs" },
-      { label: "Bachelor in Computer Application (BCA)", to: "/bca" },
-    ],
-  },
+ {
+  label: "Academic Programs",
+  to: "/academics",
+  children: [
+    { label: "Bachelor in Social Work (BSW)", to: "/bsw" },
+    { label: "Bachelor in Business Studies (BBS)", to: "/bbs" },
+    { label: "Bachelor in Computer Application (BCA)", to: "/bca" },
+    { label: "+2 in Science", to: "/plus2-science" },
+    { label: "+2 in Management", to: "/plus2-management" },
+    { label: "+2 in Law", to: "/plus2-law" },
+  ],
+},
+
   { label: "Student Life", to: "/student-life" },
   { label: "Admission", to: "/admission" },
 ];
@@ -43,6 +47,10 @@ export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false); // mobile drawer
   const [openAcc, setOpenAcc] = useState({});
   const { pathname } = useLocation();
+
+  // --- refs to manage the 6s auto-peek behavior ---
+  const autoTimer = useRef(null);
+  const userTouched = useRef(false);
 
   // close mobile on route change
   useEffect(() => {
@@ -56,6 +64,41 @@ export default function Navbar() {
     document.body.style.overflow = drawerOpen ? "hidden" : prev || "";
     return () => (document.body.style.overflow = prev);
   }, [drawerOpen]);
+
+  // ========= DESKTOP AUTO-PEEK: show full sidebar for 6s on first load, then collapse =========
+  useEffect(() => {
+    // Only run on desktop (Tailwind lg: 1024px+)
+    const isDesktop = typeof window !== "undefined" && window.matchMedia
+      ? window.matchMedia("(min-width: 1024px)").matches
+      : true;
+
+    if (!isDesktop) return; // skip on mobile/tablet
+
+    // Start expanded (if you prefer start collapsed, setCollapsed(true) then briefly expand)
+    setCollapsed(false);
+
+    // Collapse after 6s, unless the user interacts
+    autoTimer.current = setTimeout(() => {
+      if (!userTouched.current) {
+        setCollapsed(true);
+      }
+    }, 6000);
+
+    // Cleanup
+    return () => {
+      if (autoTimer.current) clearTimeout(autoTimer.current);
+    };
+  }, []);
+
+  // when user toggles collapse manually, cancel auto-timer
+  const handleCollapseToggle = () => {
+    userTouched.current = true;
+    if (autoTimer.current) {
+      clearTimeout(autoTimer.current);
+      autoTimer.current = null;
+    }
+    setCollapsed((v) => !v);
+  };
 
   // NIC blue palette
   const nicBlue = {
@@ -104,9 +147,10 @@ export default function Navbar() {
         {/* tiny collapse toggle (desktop only) */}
         {!mobile && (
           <button
-            onClick={() => setCollapsed((v) => !v)}
+            onClick={handleCollapseToggle}
             className="absolute -right-3 top-3 h-7 w-7 grid place-items-center rounded-full bg-white text-[#b10f0f] shadow-lg border border-slate-200"
             title={collapsed ? "Expand" : "Collapse"}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? "›" : "‹"}
           </button>
@@ -149,7 +193,7 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Search row (kept as in your earlier version; add if you want) */}
+      {/* Search row */}
       <button
         className="w-full flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-100"
         onClick={() => document.getElementById("site-search")?.focus()}
@@ -158,7 +202,7 @@ export default function Navbar() {
         {!collapsed && <span>Search</span>}
       </button>
 
-      {/* SCROLLABLE MENU AREA — now with dark-blue custom scrollbar */}
+      {/* SCROLLABLE MENU AREA — with dark-blue custom scrollbar */}
       <div
         className="px-0 nic-scroll"
         style={{
@@ -178,6 +222,11 @@ export default function Navbar() {
                   if (hasKids) {
                     e.preventDefault();
                     setOpenAcc((s) => ({ ...s, [m.to]: !s[m.to] }));
+                    userTouched.current = true; // user interaction cancels auto-timer
+                    if (autoTimer.current) {
+                      clearTimeout(autoTimer.current);
+                      autoTimer.current = null;
+                    }
                   }
                 }}
                 className="group flex items-center justify-between w-full px-4 py-3 font-medium tracking-wide transition"
@@ -202,6 +251,13 @@ export default function Navbar() {
                       key={c.to}
                       to={c.to}
                       className="block px-6 py-2 border-t border-slate-100 hover:bg-[rgba(14,113,185,0.06)]"
+                      onClick={() => {
+                        userTouched.current = true;
+                        if (autoTimer.current) {
+                          clearTimeout(autoTimer.current);
+                          autoTimer.current = null;
+                        }
+                      }}
                     >
                       {c.label}
                     </Link>
@@ -226,6 +282,8 @@ export default function Navbar() {
           >
             <FaFacebookF />
           </a>
+        </div>
+        <div className="flex items-center gap-3 mt-2">
           <a
             href="https://instagram.com"
             target="_blank"
@@ -296,11 +354,11 @@ export default function Navbar() {
         }
       `}</style>
 
-      {/* ===== FLOATING MINIMIZER (Trinity style) - shows when collapsed ===== */}
+      {/* ===== FLOATING MINIMIZER (shows when collapsed on desktop) ===== */}
       {collapsed && (
         <button
           className="fixed top-20 left-3 z-[75] hidden lg:grid place-items-center"
-          onClick={() => setCollapsed(false)}
+          onClick={handleCollapseToggle}
           aria-label="Open sidebar"
           title="Open menu"
         >
