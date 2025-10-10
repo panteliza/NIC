@@ -1,55 +1,71 @@
-// src/pages/PlusTwoManagement.jsx
+// src/pages/PlusTwoLaw.jsx
 import React, { useMemo, useState } from "react";
-import Navbar from "../components/Navbar";   // keep your path
-import Footer from "../components/Footer";   // keep your path
+import Navbar from "../components/Navbar";   // use your actual paths
+import Footer from "../components/Footer";
 
-// EmailJS optional config (client-side). See instructions at bottom.
+// Optional EmailJS config (client-side). Add keys to enable direct email.
+// Otherwise it falls back to a mailto compose.
 const EMAILJS_CONFIG = {
   serviceId: "YOUR_SERVICE_ID",
   templateId: "YOUR_TEMPLATE_ID",
   publicKey: "YOUR_PUBLIC_KEY",
-  // Template variables expected: name, email, phone, parent, school, gpa, stream, message, to_email
+  // Template should accept: name, email, phone, parent, school, gpa, stream, message, to_email
   toEmail: "info@nic.edu.np",
 };
 
 const FEATURES = [
-  { title: "Core Commerce Foundation", text: "Strong base in Accounting, Economics, Business Studies, and Mathematics/Computer as per NEB." },
-  { title: "Practical Exposure", text: "Industry talks, bank/enterprise visits, and project-based learning aligned to Nepal’s business context." },
-  { title: "Entrepreneurship & Clubs", text: "Business, Finance & Debate clubs; case competitions; startup and leadership workshops." },
-  { title: "Higher Studies Guidance", text: "Support for BBA, BBM, BBS, CA/ACCA, Hotel Mgmt., and abroad counseling where applicable." },
+  { title: "Moot Court & Debates", text: "Practice advocacy through structured moot court sessions, debates, and model hearings." },
+  { title: "Court & Law Firm Visits", text: "Guided visits to courts/legal institutions for practical insight into Nepal’s justice system." },
+  { title: "Legal Writing & Drafting", text: "Foundations of legal language, case briefs, petitions, and structured drafting exercises." },
+  { title: "Civics & Ethics", text: "Constitutional values, human rights awareness, and civic responsibility." },
 ];
 
-const SUBJECT_SET = [
-  "English",
-  "Nepali / Social",
-  "Accounting",
-  "Economics",
-  "Business Studies",
-  "Mathematics (optional) / Computer / Marketing",
+const SUBJECT_GROUPS = [
+  {
+    track: "NEB Law Core",
+    subjects: [
+      "English",
+      "Nepali / Social",
+      "Constitutional Law (Foundations)",
+      "Civil & Criminal Law (Basics)",
+      "Procedural Law & Legal Drafting",
+      "Human Rights / Legal System of Nepal",
+    ],
+    note: "Final subject mix follows current NEB guidelines and college intake policy.",
+  },
+  {
+    track: "Optional / Supportive",
+    subjects: [
+      "Mathematics (optional)",
+      "Computer (optional)",
+      "Economics / Sociology (as offered)",
+    ],
+    note: "Optional subjects depend on seat availability and your higher-studies plan.",
+  },
 ];
 
 const FAQS = [
   {
-    q: "Who should choose +2 Management?",
-    a: "Students aiming for careers in business, finance, hospitality, entrepreneurship, marketing, HR, or management studies in Nepal or abroad.",
+    q: "Who should choose +2 in Law?",
+    a: "Students interested in legal studies, public administration, human rights, governance, and advocacy—including those planning for BALLB or other law pathways.",
+  },
+  {
+    q: "Is the curriculum NEB-aligned?",
+    a: "Yes. NIC follows NEB requirements for +2 Law and complements it with enrichment activities like moot court, visits, and legal writing.",
   },
   {
     q: "Are scholarships available?",
-    a: "Yes. Limited merit/need-based waivers may be offered per college policy and intake announcements.",
+    a: "Limited waivers/merit consideration may be announced during intake as per college policy.",
   },
   {
-    q: "What about practical exposure?",
-    a: "NIC encourages projects, presentations, case studies, guest lectures, and local enterprise visits for context-rich learning.",
-  },
-  {
-    q: "NEB compliance?",
-    a: "Yes. The curriculum follows NEB guidelines, with additional enrichment based on teacher planning and availability.",
+    q: "What are the higher-study pathways?",
+    a: "BALLB, B.Sc. in Criminology, Public Administration, International Relations, Social Sciences, or related fields in Nepal/abroad.",
   },
 ];
 
 function encodeMailtoBody(fields) {
   const lines = [
-    `New +2 Management Inquiry`,
+    `New +2 Law Inquiry`,
     ``,
     `Full Name: ${fields.name}`,
     `Email: ${fields.email}`,
@@ -65,7 +81,7 @@ function encodeMailtoBody(fields) {
   return encodeURIComponent(lines.join("\n"));
 }
 
-export default function PlusTwoManagement() {
+export default function PlusTwoLaw() {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -73,7 +89,7 @@ export default function PlusTwoManagement() {
     parent: "",
     school: "",
     gpa: "",
-    stream: "Accounting & Economics Focus",
+    stream: "Law Foundations & Legal Writing",
     message: "",
   });
   const [sending, setSending] = useState(false);
@@ -81,10 +97,10 @@ export default function PlusTwoManagement() {
 
   const stats = useMemo(
     () => [
-      { label: "Student–Teacher Ratio", value: "1:22" },
-      { label: "Industry Sessions / Term", value: "4+" },
-      { label: "Active Clubs", value: "8+" },
-      { label: "Internship Support", value: "Yes" },
+      { label: "Moot Sessions / Term", value: "3+" },
+      { label: "Field/Institution Visits", value: "2+" },
+      { label: "Clubs (Debate/Legal Aid)", value: "Active" },
+      { label: "Mentor Hours / Week", value: "4+" },
     ],
     []
   );
@@ -109,6 +125,7 @@ export default function PlusTwoManagement() {
     setSending(true);
     setToast({ type: "", msg: "" });
 
+    // Try EmailJS first when configured
     try {
       if (window.emailjs && EMAILJS_CONFIG.publicKey !== "YOUR_PUBLIC_KEY") {
         const payload = {
@@ -136,7 +153,7 @@ export default function PlusTwoManagement() {
           parent: "",
           school: "",
           gpa: "",
-          stream: "Accounting & Economics Focus",
+          stream: "Law Foundations & Legal Writing",
           message: "",
         });
         setSending(false);
@@ -146,7 +163,8 @@ export default function PlusTwoManagement() {
       console.error("EmailJS error:", err);
     }
 
-    const subject = encodeURIComponent("+2 Management Inquiry - NIC");
+    // Fallback: mailto compose
+    const subject = encodeURIComponent("+2 Law Inquiry - NIC");
     const body = encodeMailtoBody(form);
     window.location.href = `mailto:info@nic.edu.np?subject=${subject}&body=${body}`;
     setSending(false);
@@ -164,10 +182,10 @@ export default function PlusTwoManagement() {
       <section className="pt-24 md:pt-28 bg-gradient-to-b from-sky-900 via-blue-900 to-slate-900 text-white">
         <div className="mx-auto max-w-7xl px-4 py-12">
           <p className="text-white/70 text-xs md:text-sm">Home / Academics / +2 Programs</p>
-          <h1 className="mt-3 text-3xl md:text-5xl font-bold">+2 in Management (NEB)</h1>
+          <h1 className="mt-3 text-3xl md:text-5xl font-bold">+2 in Law (NEB)</h1>
           <p className="mt-3 max-w-3xl text-white/80">
-            Build a future in business, finance, and entrepreneurship with a strong NEB-aligned commerce foundation,
-            practical projects, and leadership exposure tailored to Nepal’s market realities.
+            Build legal thinking early—learn the basics of Nepal’s legal system, constitutional values,
+            and ethical reasoning with practical exposure through moot court and visits.
           </p>
 
           {/* Stats */}
@@ -182,13 +200,13 @@ export default function PlusTwoManagement() {
         </div>
       </section>
 
-      {/* Why NIC Management */}
+      {/* Why NIC Law */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Why +2 Management at NIC?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Why +2 Law at NIC?</h2>
           <p className="mt-2 text-slate-600 max-w-3xl">
-            Learn with case studies, presentations, and community projects. Develop analytical, communication,
-            and leadership skills that matter in Nepal’s business ecosystem.
+            NIC offers structured learning aligned with NEB, plus practical activities that prepare you
+            for BALLB and related social-science paths in Nepal’s context.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -202,23 +220,27 @@ export default function PlusTwoManagement() {
         </div>
       </section>
 
-      {/* Subjects */}
+      {/* Subject Tracks */}
       <section className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">NEB Subject Set</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">NEB Subject Groups</h2>
           <p className="mt-2 text-slate-600 max-w-3xl">
-            The final subject combination follows NEB rules and seat availability. Counselors will help lock your choices during admission.
+            Final combinations follow NEB rules and the college’s intake announcement. Counselors will
+            help you lock the best fit for your goals.
           </p>
 
-          <div className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <ul className="list-disc pl-6 text-slate-700 space-y-1">
-              {SUBJECT_SET.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-            <p className="mt-3 text-sm text-slate-600">
-              Optional papers (Math/Computer/Marketing) depend on your higher-studies plan (BBA, BBM, BBS, CA/ACCA, etc.).
-            </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {SUBJECT_GROUPS.map((g) => (
+              <div key={g.track} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+                <h3 className="text-lg font-semibold text-slate-900">{g.track}</h3>
+                <ul className="mt-3 list-disc pl-6 text-slate-700 space-y-1">
+                  {g.subjects.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm text-slate-600">{g.note}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -232,15 +254,15 @@ export default function PlusTwoManagement() {
               <ul className="mt-3 space-y-2 text-slate-700">
                 <li>• Eligibility: SEE or equivalent as per NEB policy.</li>
                 <li>• Submit: SEE marksheet, character certificate, photos, citizenship (if applicable).</li>
-                <li>• Seats are limited — apply early for preferred optional subjects.</li>
+                <li>• Streams and optional subjects finalized during counseling (seat-based).</li>
               </ul>
             </div>
             <div className="rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h3 className="text-xl font-semibold text-slate-900">Scholarships</h3>
               <ul className="mt-3 space-y-2 text-slate-700">
-                <li>• Merit/need-based waivers per intake announcement.</li>
+                <li>• Limited merit/need-based waivers per intake notice.</li>
                 <li>• Entrance/placement performance may be considered.</li>
-                <li>• Continuation depends on academic performance and attendance.</li>
+                <li>• Continuation subject to academic performance and attendance.</li>
               </ul>
             </div>
           </div>
@@ -254,7 +276,8 @@ export default function PlusTwoManagement() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Apply / Inquiry</h2>
               <p className="mt-2 text-slate-600">
-                Fill this form. Your message goes to <span className="font-semibold">info@nic.edu.np</span>.
+                Fill this quick form. Your message goes directly to{" "}
+                <span className="font-semibold">info@nic.edu.np</span>.
               </p>
 
               {toast.msg ? (
@@ -340,7 +363,7 @@ export default function PlusTwoManagement() {
                       className="mt-1 w-full rounded-xl border-slate-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
                       value={form.gpa}
                       onChange={(e) => setForm({ ...form, gpa: e.target.value })}
-                      placeholder="e.g., GPA 3.2 / %"
+                      placeholder="e.g., GPA 3.0 / %"
                       required
                     />
                   </div>
@@ -353,10 +376,10 @@ export default function PlusTwoManagement() {
                     value={form.stream}
                     onChange={(e) => setForm({ ...form, stream: e.target.value })}
                   >
-                    <option>Accounting & Economics Focus</option>
-                    <option>Marketing & Entrepreneurship Focus</option>
-                    <option>Computer & Business Analytics Focus</option>
-                    <option>Hospitality & Service Mgmt. Focus</option>
+                    <option>Law Foundations & Legal Writing</option>
+                    <option>Human Rights & Civic Studies</option>
+                    <option>Constitution & Governance Focus</option>
+                    <option>Criminal Justice Basics</option>
                   </select>
                 </div>
 
@@ -418,10 +441,10 @@ export default function PlusTwoManagement() {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-            Step into business with NIC.
+            Ready to explore law at NIC?
           </h3>
           <p className="mt-2 text-slate-600">
-            Apply early to secure your optional subjects and club preferences.
+            Apply early to secure your preferred focus and activity slots.
           </p>
           <a
             href="#"

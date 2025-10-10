@@ -10,6 +10,7 @@ import BSW from './pages/BSW';
 import BBS from './pages/BBS';
 import PlusTwoScience from './pages/PlusTwoScience';
 import PlusTwoManagement from './pages/PlusTwoManagement';
+import  PlusTwoLaw  from './pages/PlusTwoLaw';
 
 
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/bbs" element={<BBS/>} />
           <Route path="/plus2-science" element={<PlusTwoScience/>} />
           <Route path="/plus2-management" element={<PlusTwoManagement/>} />
+          <Route path="/plus2-law" element={<PlusTwoLaw/>} />
           
          
         
