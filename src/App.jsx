@@ -5,6 +5,7 @@ import './App.css';
 import FloatingButtons from './components/FloatingButtons';
 
 import Home from './pages/Home';
+import BCA from './pages/BCA';
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
            <Route path="/" element={<Home />} />
           <Route path="/nic" element={<Home />} />
           <Route path="/national-integrated-college" element={<Home />} />
+          <Route path="/bca" element={<BCA />} />
           
          
         
