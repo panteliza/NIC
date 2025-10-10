@@ -6,6 +6,7 @@ import FloatingButtons from './components/FloatingButtons';
 
 import Home from './pages/Home';
 import BCA from './pages/BCA';
+import BSW from './pages/BSW';
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/nic" element={<Home />} />
           <Route path="/national-integrated-college" element={<Home />} />
           <Route path="/bca" element={<BCA />} />
+          <Route path="/bsw" element={<BSW />} />
           
          
         
