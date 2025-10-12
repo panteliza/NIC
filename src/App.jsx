@@ -13,6 +13,7 @@ import PlusTwoManagement from './pages/PlusTwoManagement';
 import  PlusTwoLaw  from './pages/PlusTwoLaw';
 import AboutNIC from './pages/AboutNIC';
 import Admissions from './pages/Admissions';
+import Contact from './pages/Contact';
 
 
 
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/plus2-law" element={<PlusTwoLaw/>} />
           <Route path="/about" element={<AboutNIC/>} />
           <Route path="/admission" element={<Admissions/>} />
+          <Route path="/contact" element={<Contact/>} />
           
          
         
