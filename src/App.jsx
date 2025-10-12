@@ -33,6 +33,8 @@ const App = () => {
         <FloatingButtons />
         <Routes>
            <Route path="/" element={<Home />} />
+           <Route path="/home" element={<Home />} />
+
           <Route path="/nic" element={<Home />} />
           <Route path="/national-integrated-college" element={<Home />} />
           <Route path="/bca" element={<BCA />} />
