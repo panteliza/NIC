@@ -8,7 +8,7 @@ import NicMap from "../assets/map.png";
 
 export default function Contact() {
   const addressText = "NIC, Dillibazar, Kathmandu 44600";
-  const phoneText = "01-XXXXXXX";
+  const phoneText = "01-4017603";
   const emailText = "info@nic.edu.np";
  
   const mapsLink =
