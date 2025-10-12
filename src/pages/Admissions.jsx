@@ -1,261 +1,249 @@
-import React, { useState } from "react";
+// src/pages/Admissions.jsx
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { CheckCircle2, Mail, Phone, MapPin, Upload, Calendar, User2 } from "lucide-react";
+import { Send, Calendar, Mail, Phone, User2, GraduationCap, Building2 } from "lucide-react";
 
-/* ===== NIC Admissions Page ===== */
 export default function Admissions() {
-  const [sending, setSending] = useState(false);
-  const [ok, setOk] = useState(false);
-  const [err, setErr] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    dob: "",
+    address: "",
+    phone: "",
+    email: "",
+    program: "",
+    guardian: "",
+    school: "",
+    grade: "",
+  });
+  const set = (e) => setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
 
-  async function handleSubmit(e) {
+  // Parallax for glow blobs
+  useEffect(() => {
+    const onMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 28;
+      const y = (e.clientY / window.innerHeight - 0.5) * 28;
+      document.documentElement.style.setProperty("--p-x", `${x}px`);
+      document.documentElement.style.setProperty("--p-y", `${y}px`);
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  const submit = (e) => {
     e.preventDefault();
-    setSending(true);
-    setOk(false);
-    setErr("");
+    const body = `
+National Integrated College (NIC) – Admission Application
 
-    const form = e.currentTarget;
-    const fd = new FormData(form);
+Full Name: ${form.name}
+Date of Birth: ${form.dob}
+Address: ${form.address}
+Phone: ${form.phone}
+Email: ${form.email}
 
-    // simple anti-bot honeypot
-    if (fd.get("website")) {
-      setErr("Spam detected.");
-      setSending(false);
-      return;
-    }
+Program Applied For: ${form.program}
 
-    try {
-      const res = await fetch("/api/send-admission", {
-        method: "POST",
-        body: fd,
-      });
-      if (!res.ok) throw new Error(await res.text());
-      form.reset();
-      setOk(true);
-    } catch (e2) {
-      setErr(e2.message || "Failed to send. Please try again.");
-    } finally {
-      setSending(false);
-    }
-  }
+Guardian's Name: ${form.guardian}
+Previous School: ${form.school}
+GPA / Grade: ${form.grade}
+
+Submitted from: NIC Admission Page
+    `.trim();
+
+    const mailto = `mailto:info@nic.edu.np?subject=${encodeURIComponent(
+      `NIC Admission Application – ${form.name || "Student"}`
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-800">
+    <div className="min-h-screen flex flex-col bg-white text-slate-800 relative overflow-hidden">
+      {/* keyframes + motion-safety */}
+      <style>{`
+        @keyframes nicGradient { 
+          0%{background-position:0% 0%} 50%{background-position:100% 60%} 100%{background-position:0% 0%}
+        }
+        @keyframes nicBeam {
+          0% { transform: translateX(-35%) rotate(10deg); opacity:.35 }
+          50% { transform: translateX(15%) rotate(10deg); opacity:.6 }
+          100% { transform: translateX(45%) rotate(10deg); opacity:.35 }
+        }
+        @keyframes nicFloat { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(0,-16px,0)} }
+        @keyframes nicStars { 0%{transform:translateY(0);opacity:0} 10%{opacity:.45} 90%{opacity:.45} 100%{transform:translateY(-120%);opacity:0} }
+        @keyframes nicSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @media (prefers-reduced-motion: reduce){
+          * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+        }
+      `}</style>
+
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-sky-900 via-sky-800 to-slate-900" />
-        {/* soft blobs */}
-        <div className="pointer-events-none absolute -right-24 -top-24 w-[34rem] h-[34rem] rounded-full bg-cyan-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute -left-24 -bottom-24 w-[28rem] h-[28rem] rounded-full bg-sky-300/20 blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-white">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs uppercase tracking-wide">
-            <CheckCircle2 className="w-4 h-4" /> Official Admission Form
-          </p>
-          <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold">
-            Apply to National Integrated College (NIC)
+      {/* ===== HERO with high-visibility animation ===== */}
+      <section className="relative">
+        {/* 1) animated gradient base */}
+        <div
+          className="absolute inset-0 -z-40"
+          style={{
+            backgroundImage:
+              "radial-gradient(1000px 520px at 12% 18%, #06b6d4 15%, transparent 62%), radial-gradient(1200px 600px at 88% 10%, #22d3ee 12%, transparent 60%), linear-gradient(120deg,#082f49 0%, #0c4a6e 36%, #0369a1 70%, #083044 100%)",
+            backgroundSize: "160% 160%",
+            animation: "nicGradient 14s ease-in-out infinite",
+          }}
+        />
+
+        {/* 2) sweeping beams */}
+        <div
+          className="pointer-events-none absolute -inset-x-1 -top-24 h-80 -z-30"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent)", transform: "rotate(10deg)", animation: "nicBeam 12s ease-in-out infinite" }}
+        />
+        <div
+          className="pointer-events-none absolute -inset-x-1 -top-10 h-72 -z-30"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent)", transform: "rotate(10deg)", animation: "nicBeam 16s ease-in-out infinite reverse" }}
+        />
+
+        {/* 3) parallax glow blobs */}
+        <div
+          className="absolute -top-28 -left-24 w-[42rem] h-[42rem] rounded-full bg-cyan-300/30 blur-3xl -z-20"
+          style={{ transform: "translate(var(--p-x), var(--p-y))", animation: "nicFloat 12s ease-in-out infinite" }}
+        />
+        <div
+          className="absolute -bottom-32 -right-24 w-[36rem] h-[36rem] rounded-full bg-sky-200/30 blur-3xl -z-20"
+          style={{ transform: "translate(calc(var(--p-x)*-0.6), calc(var(--p-y)*-0.6))", animation: "nicFloat 15s ease-in-out infinite" }}
+        />
+
+        {/* 4) rotating halo ring */}
+        <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
+          <svg width="560" height="560" viewBox="0 0 560 560" className="opacity-30">
+            <defs>
+              <linearGradient id="halo" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#67e8f9" /><stop offset="100%" stopColor="#38bdf8" />
+              </linearGradient>
+            </defs>
+            <g style={{ animation: "nicSpin 24s linear infinite" }}>
+              <circle cx="280" cy="280" r="220" fill="none" stroke="url(#halo)" strokeWidth="2" />
+              <circle cx="280" cy="280" r="250" fill="none" stroke="url(#halo)" strokeOpacity=".5" strokeWidth="1" />
+            </g>
+          </svg>
+        </div>
+
+        {/* 5) star particles */}
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          {Array.from({ length: 46 }).map((_, i) => (
+            <span
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-white/70"
+              style={{
+                left: `${Math.random() * 100}%`,
+                bottom: `${Math.random() * 100}%`,
+                animation: `nicStars ${8 + Math.random() * 10}s linear infinite`,
+                animationDelay: `${Math.random() * 8}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* hero copy */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-28 text-center text-white">
+          <span className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-xs uppercase tracking-wide">
+            <GraduationCap className="w-4 h-4" /> Official NIC Admission
+          </span>
+          <h1 className="mt-3 text-3xl sm:text-5xl font-extrabold drop-shadow-[0_8px_20px_rgba(0,0,0,.35)]">
+            Admission Form – National Integrated College
           </h1>
-          <p className="mt-3 text-white/90 max-w-2xl">
-            Fill the form below. Your application will be emailed directly to <span className="font-semibold">info@nic.edu.np</span>.
+          <p className="mt-3 text-white/90 max-w-2xl mx-auto">
+            Submit the form and your mail app opens with all details pre-filled to <b>info@nic.edu.np</b>.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3 text-sm">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1"><Calendar className="w-4 h-4"/> Rolling Admissions</span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1"><Phone className="w-4 h-4"/> 01-4234567</span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1"><Mail className="w-4 h-4"/> info@nic.edu.np</span>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm text-white/90">
+            <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
+              <Calendar className="w-4 h-4" /> Rolling Admissions
+            </span>
+            <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
+              <Phone className="w-4 h-4" /> 01-4234567
+            </span>
+            <span className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
+              <Mail className="w-4 h-4" /> info@nic.edu.np
+            </span>
           </div>
         </div>
       </section>
 
-      {/* FORM CARD */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 pb-12 w-full">
-        <div className="rounded-2xl bg-white shadow-xl border border-slate-200 overflow-hidden">
-          <div className="px-6 sm:px-10 py-6 border-b border-slate-200 bg-slate-50">
-            <h2 className="text-xl font-bold">Admission Application</h2>
-            <p className="text-slate-600 text-sm">Fields marked * are required.</p>
+      {/* ===== FORM (unchanged structure; glass look) ===== */}
+      <section className="-mt-16 mb-16 px-4">
+        <div className="max-w-5xl mx-auto rounded-3xl bg-white/80 backdrop-blur-xl shadow-2xl ring-1 ring-black/5 p-6 sm:p-10">
+          <div className="relative mb-8">
+            <div className="absolute -inset-x-6 -top-6 h-20 bg-gradient-to-r from-sky-100/60 via-white/40 to-cyan-100/60 blur-xl rounded-3xl" />
+            <div className="relative flex items-center justify-between">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-sky-900">Apply for Admission</h2>
+              <div className="hidden sm:flex items-center gap-2 text-slate-500">
+                <Building2 className="w-4 h-4" /> Dillibazar, Kathmandu
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="px-6 sm:px-10 py-8">
-            {/* Honeypot */}
-            <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
-
-            {/* Top section */}
-            <div className="grid lg:grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-medium">Academic Year *</label>
-                <input name="academicYear" required placeholder="2082/83 or 2025/26"
-                       className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div className="lg:col-span-2">
-                <fieldset className="mt-1">
-                  <legend className="block text-sm font-medium">Applied For *</legend>
-                  <div className="mt-2 grid sm:grid-cols-3 gap-3">
-                    {[
-                      {v:"+2 Science", n:"plus2_science"},
-                      {v:"+2 Management", n:"plus2_management"},
-                      {v:"+2 Law", n:"plus2_law"},
-                      {v:"BBS", n:"bbs"},
-                      {v:"BCA", n:"bca"},
-                      {v:"BSW", n:"bsw"},
-                    ].map(o=>(
-                      <label key={o.n} className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2">
-                        <input type="checkbox" name="programs" value={o.v} />
-                        <span>{o.v}</span>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-              </div>
+          <form onSubmit={submit} className="space-y-10">
+            <div className="grid md:grid-cols-2 gap-6">
+              <Field label="Full Name *" name="name" placeholder="Enter your full name" value={form.name} onChange={set} required />
+              <Field label="Date of Birth *" type="date" name="dob" value={form.dob} onChange={set} required />
+              <Field className="md:col-span-2" label="Permanent Address *" name="address" placeholder="Dillibazar, Kathmandu, Nepal" value={form.address} onChange={set} required />
+              <Field label="Phone Number *" name="phone" placeholder="98XXXXXXXX" value={form.phone} onChange={set} pattern="[0-9+ \\-]{7,}" required />
+              <Field label="Email Address *" type="email" name="email" placeholder="you@example.com" value={form.email} onChange={set} required />
             </div>
 
-            <div className="mt-8 grid lg:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium">Applicant Full Name (Capital) *</label>
-                <input name="fullName" required className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
+            {/* program tiles */}
+            <div>
+              <Label>Program Applied For *</Label>
+              <div className="mt-3 grid sm:grid-cols-3 gap-3">
+                {["+2 Science", "+2 Management", "+2 Law", "BCA", "BBS", "BSW"].map((p) => {
+                  const active = form.program === p;
+                  return (
+                    <button
+                      type="button"
+                      key={p}
+                      onClick={() => setForm((s) => ({ ...s, program: p }))}
+                      className={`group relative overflow-hidden rounded-2xl border px-4 py-3 text-left transition ${
+                        active ? "border-sky-500 bg-sky-50 shadow" : "border-slate-200 bg-white hover:border-sky-300"
+                      }`}
+                    >
+                      <span className={`font-semibold ${active ? "text-sky-800" : "text-slate-800"}`}>{p}</span>
+                      <span className={`absolute -right-6 -top-6 w-20 h-20 rounded-full ${active ? "bg-sky-200/60" : "bg-slate-100/60"}`} />
+                    </button>
+                  );
+                })}
               </div>
-              <div>
-                <label className="block text-sm font-medium">Name in Devanagari</label>
-                <input name="fullNameDev" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Date of Birth (AD) *</label>
-                <input type="date" name="dobAD" required className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Date of Birth (BS)</label>
-                <input name="dobBS" placeholder="e.g., 2059-07-23" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div className="lg:col-span-2">
-                <label className="block text-sm font-medium">Permanent Address *</label>
-                <div className="mt-1 flex gap-3">
-                  <MapPin className="w-5 h-5 text-slate-400 mt-2 shrink-0"/>
-                  <input name="permanentAddress" required placeholder="Ward, Municipality, District"
-                         className="w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-              </div>
-
-              <div className="lg:col-span-2">
-                <label className="block text-sm font-medium">Temporary Address</label>
-                <input name="temporaryAddress" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Applicant Contact No. *</label>
-                <input name="applicantPhone" required pattern="[0-9+ -]{7,}" placeholder="98XXXXXXXX"
-                       className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Email *</label>
-                <input type="email" name="applicantEmail" required
-                       className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Father’s Name</label>
-                <input name="fatherName" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Father’s Occupation</label>
-                <input name="fatherOccupation" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Mother’s Name</label>
-                <input name="motherName" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Mother’s Occupation</label>
-                <input name="motherOccupation" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Local Guardian</label>
-                <input name="guardianName" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Emergency Contact Person</label>
-                <input name="emergencyPerson" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Emergency Contact No.</label>
-                <input name="emergencyPhone" pattern="[0-9+ -]{7,}"
-                       className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-              </div>
+              <input type="hidden" name="program" value={form.program} />
+              {!form.program && <p className="mt-2 text-sm text-rose-600">Please select one program.</p>}
             </div>
 
-            {/* ACADEMIC HISTORY */}
-            <div className="mt-10">
-              <h3 className="text-base font-semibold">Student’s Academic History</h3>
-              <div className="mt-3 grid md:grid-cols-3 gap-4">
-                <div className="md:col-span-1">
-                  <label className="block text-sm font-medium">S.E.E – School Name</label>
-                  <input name="seeSchool" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">S.E.E – GPA/Grade</label>
-                  <input name="seeGpa" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">S.E.E – Completed Year</label>
-                  <input name="seeYear" placeholder="2078 / 2021" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-
-                <div className="md:col-span-1">
-                  <label className="block text-sm font-medium">+2 – School Name</label>
-                  <input name="plus2School" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">+2 – GPA/Grade</label>
-                  <input name="plus2Gpa" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium">+2 – Completed Year</label>
-                  <input name="plus2Year" placeholder="2080 / 2023" className="mt-1 w-full rounded-xl border-slate-300 focus:border-sky-500 focus:ring-sky-500"/>
-                </div>
-              </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <Field label="Guardian’s Name" name="guardian" placeholder="Parent or Guardian’s full name" value={form.guardian} onChange={set} />
+              <Field label="Previous School" name="school" placeholder="Name of your last school" value={form.school} onChange={set} />
+              <Field label="GPA / Grade" name="grade" placeholder="e.g., 3.75 / A+" value={form.grade} onChange={set} />
             </div>
 
-            {/* PHOTO UPLOAD */}
-            <div className="mt-10">
-              <label className="block text-sm font-medium">Recent Passport Size Photo (JPG/PNG, ≤2MB)</label>
-              <label className="mt-2 flex items-center gap-3 rounded-xl border border-dashed border-slate-300 p-4 cursor-pointer hover:border-sky-400">
-                <Upload className="w-5 h-5 text-slate-500" />
-                <input type="file" name="photo" accept="image/*" className="hidden" />
-                <span className="text-sm text-slate-600">Click to choose file</span>
-              </label>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              I confirm the information provided is true and correct to the best of my knowledge.
             </div>
 
-            {/* DECLARATION */}
-            <div className="mt-8 rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm">
-              I hereby confirm that the information provided is true and correct to the best of my knowledge.
-            </div>
-
-            {/* SUBMIT */}
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="pt-2 text-center">
               <button
                 type="submit"
-                disabled={sending}
-                className="inline-flex items-center justify-center rounded-xl bg-sky-700 hover:bg-sky-800 text-white px-6 py-3 font-semibold shadow disabled:opacity-60"
+                disabled={!form.name || !form.dob || !form.address || !form.phone || !form.email || !form.program}
+                className="inline-flex items-center gap-2 rounded-2xl bg-sky-700 px-8 py-3 font-semibold text-white shadow-lg hover:bg-sky-800 active:scale-[.99] disabled:opacity-60"
               >
-                {sending ? "Submitting..." : "Submit Application"}
+                <Send className="w-5 h-5" />
+                Submit & Open Email
               </button>
-              <a href="mailto:info@nic.edu.np" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3">
-                <Mail className="w-4 h-4" /> Email NIC
-              </a>
+              <p className="mt-2 text-xs text-slate-500 flex items-center justify-center gap-2">
+                <User2 className="w-3 h-3" />
+                Your mail app will open with everything filled in to <b>info@nic.edu.np</b>.
+              </p>
             </div>
-
-            {ok && <p className="mt-4 text-green-600 text-sm">Application sent successfully. We’ll contact you soon.</p>}
-            {err && <p className="mt-4 text-red-600 text-sm">Error: {err}</p>}
           </form>
         </div>
       </section>
 
-      {/* FOOTER — use your standard dark patterned wrapper */}
-      <footer className="relative bg-slate-900 text-white">
+      {/* footer */}
+      <footer className="relative bg-slate-900 text-white mt-auto">
         <div className="absolute inset-0 opacity-20" aria-hidden>
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -274,11 +262,20 @@ export default function Admissions() {
   );
 }
 
-/* Data for highlight label (top hero chip if needed later) */
-const BADGE = ({ children }) => (
-  <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs">
-    <User2 className="w-4 h-4" /> {children}
-  </span>
-);
-
-const HIGHLIGHTS = []; // not used on this page, but left for consistency
+/* Helpers */
+function Label({ children }) {
+  return <label className="block text-sm font-medium text-slate-700">{children}</label>;
+}
+function Field({ label, name, type = "text", className = "", ...rest }) {
+  return (
+    <div className={className}>
+      <Label>{label}</Label>
+      <input
+        type={type}
+        name={name}
+        {...rest}
+        className="mt-1 w-full rounded-2xl border border-slate-300 bg-white/90 focus:border-sky-500 focus:ring-sky-500 px-4 py-2.5"
+      />
+    </div>
+  );
+}
