@@ -12,6 +12,7 @@ import PlusTwoScience from './pages/PlusTwoScience';
 import PlusTwoManagement from './pages/PlusTwoManagement';
 import  PlusTwoLaw  from './pages/PlusTwoLaw';
 import AboutNIC from './pages/AboutNIC';
+import Admissions from './pages/Admissions';
 
 
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/plus2-management" element={<PlusTwoManagement/>} />
           <Route path="/plus2-law" element={<PlusTwoLaw/>} />
           <Route path="/about" element={<AboutNIC/>} />
+          <Route path="/admission" element={<Admissions/>} />
           
          
         

@@ -192,14 +192,7 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Search row */}
-      <button
-        className="w-full flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-100"
-        onClick={() => document.getElementById("site-search")?.focus()}
-      >
-        <FiSearch />
-        {!collapsed && <span>Search</span>}
-      </button>
+     
 
       {/* SCROLLABLE MENU AREA — with dark-blue custom scrollbar */}
       <div
@@ -270,18 +263,7 @@ export default function Navbar() {
 
       {/* Socials */}
       <div className="px-4 py-3 border-t border-slate-100">
-        <div className="flex items-center gap-3">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer"
-            className="h-9 w-9 grid place-items-center rounded-full text-white"
-            style={{ backgroundColor: nicBlue.base }}
-            title="Facebook"
-          >
-            <FaFacebookF />
-          </a>
-        </div>
+       
         <div className="flex items-center gap-3 mt-2">
           <a
             href="https://instagram.com"
@@ -293,25 +275,8 @@ export default function Navbar() {
           >
             <FaInstagram />
           </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noreferrer"
-            className="h-9 w-9 grid place-items-center rounded-full text-white"
-            style={{ backgroundColor: nicBlue.base }}
-            title="YouTube"
-          >
-            <FaYoutube />
-          </a>
-          <a
-            href="https://maps.google.com"
-            target="_blank"
-            rel="noreferrer"
-            className="ml-auto h-9 w-9 grid place-items-center rounded-full bg-slate-900 text-white"
-            title="Find us"
-          >
-            <FaMapMarkerAlt />
-          </a>
+        
+         
           <a
             href="https://wa.me/+9779801125262"
             target="_blank"
