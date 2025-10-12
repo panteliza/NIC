@@ -2,7 +2,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { MapPin, Phone, Mail, Globe, Navigation, Copy, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Mail, Navigation, Copy,} from "lucide-react";
 // ⬇️ Update this to your actual image file in /src/assets
 import NicMap from "../assets/map.png";
 
@@ -73,14 +73,48 @@ export default function Contact() {
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-24 text-center text-white">
-          <h1 className="text-3xl sm:text-5xl font-extrabold drop-shadow-[0_8px_20px_rgba(0,0,0,.35)]">
-            Contact National Integrated College (NIC)
-          </h1>
-          <p className="mt-3 text-white/90 max-w-2xl mx-auto">
-            We’re here to help with admissions, programs, scholarships, and campus visits.
-          </p>
-        </div>
+       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-24 text-center">
+  {/* Deep royal glow behind heading */}
+  <div className="absolute inset-0 flex items-center justify-center -z-10 p-4">
+    <div className="w-[700px] h-[250px] bg-gradient-to-r from-[#00264d] via-[#003366] to-[#004080] blur-3xl opacity-50 rounded-full animate-pulse "></div>
+  </div>
+
+  {/* Royal gradient title */}
+  <h1
+    className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#003366] via-[#0059b3] to-[#0088cc] bg-clip-text text-transparent drop-shadow-[0_5px_25px_rgba(0,102,255,0.45)] animate-gradient-flow p-2"
+    style={{
+      backgroundSize: "300% 300%",
+      animation: "gradientFlow 8s ease-in-out infinite",
+    }}
+  >
+    Contact National Integrated College (NIC)
+  </h1>
+
+  {/* Subtext with elegant dark glow */}
+  <p
+    className="mt-4 text-lg sm:text-xl font-medium bg-gradient-to-r from-[#99ccff] via-[#66b3ff] to-[#3399ff] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,85,255,0.5)]"
+    style={{
+      backgroundSize: "300% 300%",
+      animation: "gradientFlow 10s linear infinite",
+    }}
+  >
+    We’re here to help with admissions, programs, scholarships, and campus visits.
+  </p>
+
+
+
+  {/* Keyframes */}
+  <style>
+    {`
+      @keyframes gradientFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    `}
+  </style>
+</div>
+
       </section>
 
       {/* ===== Contact Info + Map ===== */}
