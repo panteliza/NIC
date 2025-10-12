@@ -20,10 +20,8 @@ import logo from "../assets/logo.png"; // NIC logo
 
 // ------- MENU (edit labels/paths as needed) -------
 const MENU = [
-  { label: "Academic Calendar +2", to: "/calendar" },
-  { label: "Club Membership", to: "/clubs" },
-  { label: "Grade XI Orientation Program", to: "/orientation" },
-  { label: "First Term Exam", to: "/first-term-exam" },
+  { label: "Home", to: "/home" },
+ 
   { label: "About NIC", to: "/about" },
  {
   label: "Academic Programs",
@@ -40,6 +38,7 @@ const MENU = [
 
   { label: "Student Life", to: "/student-life" },
   { label: "Admission", to: "/admission" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Navbar() {
