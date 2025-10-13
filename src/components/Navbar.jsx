@@ -29,6 +29,7 @@ const MENU = [
       { label: "+2 in Law", to: "/plus2-law" },
     ],
   },
+  { label: "Programs", to: "/programs" },
   { label: "Student Life", to: "/student-life" },
   { label: "Admission", to: "/admission" },
   { label: "Contact", to: "/contact" },

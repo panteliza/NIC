@@ -15,6 +15,10 @@ import bbsImg from "../assets/bbs.webp";   // BBS hero/image
 import programIcon from "../assets/logo.png";
 
 export default function Programs() {
+    useEffect(() => {
+            // Scroll to the top when the page loads
+            window.scrollTo(0, 0);
+          }, []);
   const [visible, setVisible] = useState([]);
 
   useEffect(() => {
