@@ -78,7 +78,7 @@ Submitted from: NIC Admission Page
 
   const openEmailClients = () => {
     const { subject, body } = makeSubjectBody();
-    const to = "elizapant.github@gmail.com";
+    const to = "info@nic.edu.np";
 
     // Build Gmail compose and mailto
     const gmailURL =
