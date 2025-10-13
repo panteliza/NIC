@@ -18,7 +18,7 @@ const MENU = [
   { label: "Home", to: "/home" },
   { label: "About NIC", to: "/about" },
   {
-    label: "Academic Programs",
+    label: "Show Programs",
     to: "/academics",
     children: [
       { label: "Bachelor in Social Work (BSW)", to: "/bsw" },
@@ -29,7 +29,7 @@ const MENU = [
       { label: "+2 in Law", to: "/plus2-law" },
     ],
   },
-  { label: "Programs", to: "/programs" },
+  { label: "Academics", to: "/programs" },
   { label: "Student Life", to: "/student-life" },
   { label: "Admission", to: "/admission" },
   { label: "Contact", to: "/contact" },
