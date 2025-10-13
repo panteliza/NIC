@@ -12,6 +12,8 @@ import { MdEmail } from "react-icons/md";
 import logo from "../assets/logo.png";
 
 export default function FooterNIC() {
+  const headingClass = "text-lg font-bold tracking-wide mb-4";
+
   return (
     <footer className="relative text-white">
       {/* --- DIAMOND PATTERN BACKGROUND --- */}
@@ -34,8 +36,8 @@ export default function FooterNIC() {
 
       {/* --- CONTENT GRID --- */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-12">
-        <div className="grid gap-10 md:gap-12 lg:gap-16 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          {/* Column 1: NIC Colleges */}
+        <div className="grid gap-10 md:gap-12 lg:gap-16 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-start">
+          {/* Column 1: NIC College */}
           <div className="space-y-8">
             <div>
               <div className="flex items-center gap-3">
@@ -72,16 +74,20 @@ export default function FooterNIC() {
             </div>
           </div>
 
-          {/* Column 2: Academic Programs */}
+          {/* Column 2: +2 Programs */}
           <div>
-            <h3 className="text-lg font-bold tracking-wide mb-4">+2 PROGRAMS (NEB)</h3>
+            <h3 className={headingClass}>+2 PROGRAMS (NEB)</h3>
             <ul className="space-y-2 text-[15px] text-[#c7d0d9]">
               <li><Link to="/plus2-science" className="text-[#9ed0ff] hover:text-white">+2 in Science</Link></li>
               <li><Link to="/plus2-management" className="text-[#9ed0ff] hover:text-white">+2 in Management</Link></li>
               <li><Link to="/plus2-law" className="text-[#9ed0ff] hover:text-white">+2 in Law</Link></li>
             </ul>
+          </div>
 
-            <h3 className="text-lg font-bold tracking-wide mt-8 mb-4">BACHELOR PROGRAMS (TU)</h3>
+          {/* Column 3: Bachelor Programs */}
+          <div>
+            {/* FIX: removed mt-8 so this aligns with other headings */}
+            <h3 className={headingClass}>BACHELOR PROGRAMS (TU)</h3>
             <ul className="space-y-2 text-[15px]">
               <li><Link to="/bca" className="text-[#9ed0ff] hover:text-white">BCA – Bachelor in Computer Application</Link></li>
               <li><Link to="/bsw" className="text-[#9ed0ff] hover:text-white">BSW – Bachelor in Social Work</Link></li>
@@ -89,18 +95,18 @@ export default function FooterNIC() {
             </ul>
           </div>
 
-          {/* Column 3: Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold tracking-wide mb-4">QUICK LINKS</h3>
+          {/* Column 4: Quick Links */}
+          <div className="hidden lg:block">
+            <h3 className={headingClass}>QUICK LINKS</h3>
             <ul className="space-y-2 text-[15px]">
               {[
                 ["About NIC", "/about"],
                 ["Tribhuvan University", "https://tuiost.edu.np"],
                 ["Admissions", "/admission"],
-                ["Programs", "/academics"],
-                ["Alumni", "/alumni"],
+                ["Academics", "/programs"],
+            
                 ["Student Blogs", "/blogs"],
-                ["Gallery", "/gallery"],
+         
                 ["Contact Us", "/contact"],
               ].map(([label, href]) => (
                 <li key={label}>
@@ -110,23 +116,6 @@ export default function FooterNIC() {
                     <Link to={href} className="text-[#9ed0ff] hover:text-white">{label}</Link>
                   )}
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Resources */}
-          <div className="hidden lg:block">
-            <h3 className="text-lg font-bold tracking-wide mb-4">RESOURCES</h3>
-            <ul className="space-y-2 text-[15px]">
-              {[
-                ["Faculty Members", "/faculty"],
-                ["Clubs & Societies", "/clubs"],
-                ["Student Services", "/student-life"],
-                ["Notices", "/notice"],
-                ["Downloads", "/downloads"],
-                ["FAQs", "/faqs"],
-              ].map(([label, href]) => (
-                <li key={label}><Link to={href} className="text-[#9ed0ff] hover:text-white">{label}</Link></li>
               ))}
             </ul>
           </div>

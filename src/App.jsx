@@ -14,6 +14,7 @@ import  PlusTwoLaw  from './pages/PlusTwoLaw';
 import AboutNIC from './pages/AboutNIC';
 import Admissions from './pages/Admissions';
 import Contact from './pages/Contact';
+import Programs from './pages/Programs';
 
 
 
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/about" element={<AboutNIC/>} />
           <Route path="/admission" element={<Admissions/>} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/programs" element={<Programs/>} />
           
          
         
