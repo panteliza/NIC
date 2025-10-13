@@ -97,7 +97,7 @@ Submitted from: NIC Admission Page
         />
         {/* Fine grid (z-0 overlay) */}
         <div
-          className="absolute inset-0 z-0 opacity-[0.15] mix-blend-screen"
+          className="absolute inset-0 z-0 opacity-[0.15] mix-blend-screen  "
           style={{
             backgroundImage:
               "linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px)",
@@ -107,7 +107,7 @@ Submitted from: NIC Admission Page
         />
 
         {/* Content (z-10) */}
-        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-16 pb-24 sm:pt-20 sm:pb-28 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-16 pb-16 sm:pt-18 sm:pb-18 2xl:pt-24 2xl:pb-24 text-center ">
           <h1 className="text-white tracking-tight font-extrabold">
             <span className="block text-3xl sm:text-5xl leading-tight">
               Admission Form
@@ -117,26 +117,21 @@ Submitted from: NIC Admission Page
             </span>
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-sky-50/90">
-            Fill the form and your email app will open with all details pre-filled to{" "}
-            <b>info@nic.edu.np</b>.
-          </p>
+        <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-sky-50/90">
+  Please fill out the form carefully with your correct details.
+</p>
+
 
           {/* Underline accent */}
           <div className="mx-auto mt-6 h-[3px] w-44 rounded-full bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-400 shadow-[0_0_12px_rgba(56,189,248,0.35)]" />
         </div>
 
         {/* White wave separator (z-10 so it sits above bg) */}
-        <svg viewBox="0 0 1440 100" className="relative z-10 w-full h-[66px] text-white">
-          <path
-            fill="currentColor"
-            d="M0,80L80,72C160,64,320,48,480,52C640,56,800,80,960,89C1120,98,1280,90,1360,84L1440,80L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-          />
-        </svg>
+        
       </header>
 
       {/* ===== FORM CARD (same fields, refined spacing) ===== */}
-      <main className="-mt-10 mb-20 px-4">
+      <main className="-mt-10 mb-20 px-4 pt-5">
         <div className="max-w-4xl mx-auto rounded-3xl bg-white shadow-xl ring-1 ring-slate-200 p-6 sm:p-10">
           <h2 className="text-xl sm:text-2xl font-bold text-sky-900 tracking-tight">
             Apply for Admission
@@ -233,11 +228,11 @@ Submitted from: NIC Admission Page
                 className="inline-flex items-center gap-2 rounded-2xl bg-sky-700 px-8 py-3 font-semibold text-white shadow-lg hover:bg-sky-800 active:scale-[0.99] disabled:opacity-60"
               >
                 <Send className="w-5 h-5" />
-                Submit & Open Email
+                Submit Your Form
               </button>
-              <p className="mt-2 text-xs text-slate-500">
-                Your mail app will open with everything filled in to <b>info@nic.edu.np</b>.
-              </p>
+           <p className="mt-2 text-xs text-slate-500">
+  Please make sure all details are filled in correctly before submitting.
+</p>
             </div>
           </form>
         </div>
