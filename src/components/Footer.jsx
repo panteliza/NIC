@@ -64,11 +64,11 @@ export default function FooterNIC() {
               </ul>
 
               <div className="mt-4 flex items-center gap-3">
-                <a href="https://facebook.com" target="_blank" rel="noreferrer"
+                <a href="https://www.facebook.com/niccollege/" target="_blank" rel="noreferrer"
                    className="h-9 w-9 rounded bg-white/10 grid place-items-center hover:bg-white/20 transition"><FaFacebookF /></a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer"
+                <a href="https://www.instagram.com/explore/locations/1028785082/national-integrated-college/" target="_blank" rel="noreferrer"
                    className="h-9 w-9 rounded bg-white/10 grid place-items-center hover:bg-white/20 transition"><FaInstagram /></a>
-                <a href="https://youtube.com" target="_blank" rel="noreferrer"
+                <a href="https://www.youtube.com/channel/UCUrC5dzkGPoKMPOMEY0T4qA" target="_blank" rel="noreferrer"
                    className="h-9 w-9 rounded bg-white/10 grid place-items-center hover:bg-white/20 transition"><FaYoutube /></a>
               </div>
             </div>
