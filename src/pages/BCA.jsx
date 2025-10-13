@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -13,6 +13,7 @@ import {
   Sparkles,
   Layers,
 } from "lucide-react";
+import bcaImg from "../assets/bca.webp";
 
 // Reuse your site chrome
 import Navbar from "../components/Navbar";
@@ -35,6 +36,10 @@ const stagger = {
 };
 
 export default function BCA() {
+     useEffect(() => {
+      // Scroll to the top when the page loads
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
@@ -112,11 +117,12 @@ export default function BCA() {
             <motion.div variants={fadeUp} className="relative">
               {/* Replace src with your actual asset */}
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl ring-1 ring-gray-200">
-                <img
-                  src="/assets/bca-hero.jpg"
-                  alt="NIC students collaborating in the computer lab"
-                  className="h-full w-full object-cover"
-                />
+              <img
+  src={bcaImg}
+  alt="NIC students collaborating in the computer lab"
+  className="h-full w-full object-cover"
+/>
+
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-white/10" />
               </div>
               <div className="absolute -bottom-4 -right-4 hidden rounded-2xl bg-white/80 px-4 py-3 text-sm shadow-md ring-1 ring-gray-200 md:block">
@@ -241,39 +247,7 @@ export default function BCA() {
         </div>
       </section>
 
-      {/* GALLERY / IMAGE SUGGESTIONS */}
-      <section className="relative py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="Inside the lab"
-            title="Learning by doing"
-            subtitle="Use these slots for real photos: coding sessions, presentations, and teamwork."
-          />
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              { src: "/assets/bca-lab-1.jpg", caption: "Coding in the NIC lab" },
-              { src: "/assets/bca-lab-2.jpg", caption: "Project presentations" },
-              { src: "/assets/bca-lab-3.jpg", caption: "Team collaboration" },
-            ].map((g) => (
-              <figure key={g.src} className="group relative overflow-hidden rounded-3xl ring-1 ring-gray-200">
-                <img src={g.src} alt={g.caption} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-sm text-white">
-                  {g.caption}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          {/* Icon hints row */}
-          <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-gray-600">
-            <span className="inline-flex items-center gap-2"><Code2 className="h-4 w-4" />Code</span>
-            <span className="inline-flex items-center gap-2"><Server className="h-4 w-4" />Server</span>
-            <span className="inline-flex items-center gap-2"><Cloud className="h-4 w-4" />Cloud</span>
-            <span className="inline-flex items-center gap-2"><Brain className="h-4 w-4" />AI Brain</span>
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA */}
       <section className="relative bg-gradient-to-br from-[#0E71B9] to-[#0e4a7f] py-16 text-white sm:py-20">

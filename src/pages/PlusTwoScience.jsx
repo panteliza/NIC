@@ -1,5 +1,5 @@
 // src/pages/PlusTwoScience.jsx
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState,useEffect } from "react";
 // Use your existing components (already created in your project):
 import Navbar from "../components/Navbar";   // <-- keep your path
 import Footer from "../components/Footer";   // <-- keep your path
@@ -72,6 +72,10 @@ function encodeMailtoBody(fields) {
 }
 
 export default function PlusTwoScience() {
+    useEffect(() => {
+        // Scroll to the top when the page loads
+        window.scrollTo(0, 0);
+      }, []);
   const [form, setForm] = useState({
     name: "",
     email: "",

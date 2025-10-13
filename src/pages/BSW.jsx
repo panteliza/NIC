@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Heart,
@@ -16,6 +16,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import bswImg from "../assets/bws.webp";
 
 /* =====================================================
    NIC — Bachelor in Social Work (BSW) Page
@@ -32,6 +33,10 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 export default function BSW() {
+  useEffect(() => {
+          // Scroll to the top when the page loads
+          window.scrollTo(0, 0);
+        }, []);
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
@@ -79,7 +84,11 @@ export default function BSW() {
 
             <motion.div variants={fadeUp} className="relative">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl ring-1 ring-gray-200">
-                <img src="/assets/bsw-hero.jpg" alt="NIC students during community outreach" className="h-full w-full object-cover" />
+                <img
+                                src={bswImg}
+                                alt="NIC students "
+                                className="h-full w-full object-cover"
+                              />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-white/10" />
               </div>
               <div className="absolute -bottom-4 -right-4 hidden rounded-2xl bg-white/80 px-4 py-3 text-sm shadow-md ring-1 ring-gray-200 md:block">
@@ -137,32 +146,7 @@ export default function BSW() {
         </div>
       </section>
 
-      {/* GALLERY SLOTS */}
-      <section className="relative bg-gray-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="In the field" title="Learning by serving" subtitle="Use real photos here: community visits, awareness sessions, outreach." />
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              { src: "/assets/bsw-field-1.jpg", caption: "Community outreach" },
-              { src: "/assets/bsw-field-2.jpg", caption: "Awareness session" },
-              { src: "/assets/bsw-field-3.jpg", caption: "NGO collaboration" },
-            ].map((g) => (
-              <figure key={g.src} className="group relative overflow-hidden rounded-3xl ring-1 ring-gray-200">
-                <img src={g.src} alt={g.caption} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-sm text-white">{g.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-gray-600">
-            <span className="inline-flex items-center gap-2"><Heart className="h-4 w-4" />Heart</span>
-            <span className="inline-flex items-center gap-2"><Users className="h-4 w-4" />People</span>
-            <span className="inline-flex items-center gap-2"><Scale className="h-4 w-4" />Balance Scales</span>
-            <span className="inline-flex items-center gap-2"><Globe className="h-4 w-4" />Globe</span>
-          </div>
-        </div>
-      </section>
+     
 
       {/* CTA */}
       <section className="relative bg-gradient-to-br from-[#0E71B9] to-[#0e4a7f] py-16 text-white sm:py-20">

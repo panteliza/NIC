@@ -24,6 +24,10 @@ import classroom01 from "../assets/classroom01.jpeg"; // Classroom
 import students01 from "../assets/students01.jpeg";   // Student group
 
 export default function AboutNIC() {
+    useEffect(() => {
+            // Scroll to the top when the page loads
+            window.scrollTo(0, 0);
+          }, []);
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-800">
       <Navbar />

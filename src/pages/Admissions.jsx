@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Send } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Admissions() {
+    useEffect(() => {
+            // Scroll to the top when the page loads
+            window.scrollTo(0, 0);
+          }, []);
   const [form, setForm] = useState({
     name: "",
     dob: "",

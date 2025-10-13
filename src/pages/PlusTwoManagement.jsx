@@ -1,5 +1,5 @@
 // src/pages/PlusTwoManagement.jsx
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState,useEffect } from "react";
 import Navbar from "../components/Navbar";   // keep your path
 import Footer from "../components/Footer";   // keep your path
 
@@ -66,6 +66,10 @@ function encodeMailtoBody(fields) {
 }
 
 export default function PlusTwoManagement() {
+    useEffect(() => {
+        // Scroll to the top when the page loads
+        window.scrollTo(0, 0);
+      }, []);
   const [form, setForm] = useState({
     name: "",
     email: "",

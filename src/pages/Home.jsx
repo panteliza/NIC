@@ -10,9 +10,14 @@ import BoardOfDirectors from "../components/BoardOfDirectors";
 import DirectContactUs from "../components/DirectContactUs";
 import Reviews from "../components/Reviews";
 import Footer from "../components/Footer";
+import NICGallery from "../components/NICGallery";
 
 
 const Home = () => {
+   useEffect(() => {
+          // Scroll to the top when the page loads
+          window.scrollTo(0, 0);
+        }, []);
  useEffect(() => {
   // Page title
   const title = "National Integrated College (NIC) | BSW, BCA & BBS Programs in Nepal";
@@ -72,6 +77,7 @@ const Home = () => {
         <Navbar />
       </div>
       <div className="w-full flex-shrink-0 overflow-hidden">
+        <NICGallery/>
         <InfoCards/>
         <CourseDetails/>
         <ServicesComponent/>

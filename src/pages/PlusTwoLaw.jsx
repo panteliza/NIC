@@ -1,5 +1,5 @@
 // src/pages/PlusTwoLaw.jsx
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState,useEffect } from "react";
 import Navbar from "../components/Navbar";   // use your actual paths
 import Footer from "../components/Footer";
 
@@ -82,6 +82,11 @@ function encodeMailtoBody(fields) {
 }
 
 export default function PlusTwoLaw() {
+    useEffect(() => {
+        // Scroll to the top when the page loads
+        window.scrollTo(0, 0);
+      }, []);
+
   const [form, setForm] = useState({
     name: "",
     email: "",

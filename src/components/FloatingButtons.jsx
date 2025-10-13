@@ -14,7 +14,7 @@ const FloatingButtons = () => {
         <>
           {/* WhatsApp button */}
           <a
-            href="https://wa.me/9779800000000?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+            href="https://wa.me/9779840830551?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
             target="_blank"
             rel="noreferrer"
             className="floating-button green"
@@ -24,7 +24,7 @@ const FloatingButtons = () => {
 
           {/* Email button */}
           <a
-            href="mailto:sandarbhikns@gmail.com?subject=Service%20Inquiry&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20construction%20services."
+            href="mailto:info@nic.edu.np?subject=Service%20Inquiry&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20construction%20services."
             target="_blank"
             rel="noreferrer"
             className="floating-button blue"

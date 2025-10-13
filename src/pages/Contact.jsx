@@ -1,5 +1,5 @@
 // src/pages/Contact.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { MapPin, Phone, Mail, Navigation, Copy,} from "lucide-react";
@@ -7,6 +7,10 @@ import { MapPin, Phone, Mail, Navigation, Copy,} from "lucide-react";
 import NicMap from "../assets/map.png";
 
 export default function Contact() {
+    useEffect(() => {
+            // Scroll to the top when the page loads
+            window.scrollTo(0, 0);
+          }, []);
   const addressText = "NIC, Dillibazar, Kathmandu 44600";
   const phoneText = "01-4017603";
   const emailText = "info@nic.edu.np";
@@ -24,6 +28,7 @@ export default function Contact() {
   };
 
   return (
+    
     <div className="min-h-screen flex flex-col bg-white text-slate-800 relative overflow-hidden">
       {/* Inline keyframes for animated hero background */}
       <style>{`

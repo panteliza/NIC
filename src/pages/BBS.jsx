@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -15,6 +15,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import bbsImg from "../assets/bbs.webp";
 
 /* =====================================================
    NIC — Bachelor in Business Studies (BBS) Page
@@ -31,6 +32,10 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 export default function BBS() {
+     useEffect(() => {
+        // Scroll to the top when the page loads
+        window.scrollTo(0, 0);
+      }, []);
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
@@ -79,7 +84,11 @@ export default function BBS() {
 
             <motion.div variants={fadeUp} className="relative">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl ring-1 ring-gray-200">
-                <img src="/assets/bbs-hero.jpg" alt="Students presenting market research at NIC" className="h-full w-full object-cover" />
+               <img
+                 src={bbsImg}
+                 alt="NIC students "
+                 className="h-full w-full object-cover"
+               />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-white/10" />
               </div>
               <div className="absolute -bottom-4 -right-4 hidden rounded-2xl bg-white/80 px-4 py-3 text-sm shadow-md ring-1 ring-gray-200 md:block">
@@ -137,26 +146,7 @@ export default function BBS() {
         </div>
       </section>
 
-      {/* GALLERY SLOTS */}
-      <section className="relative bg-gray-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="In the classroom" title="Presentations, research, and teamwork" subtitle="Use real photos here: student presentations, surveys, analysis." />
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              { src: "/assets/bbs-presentation-1.jpg", caption: "Student presentations" },
-              { src: "/assets/bbs-research-1.jpg", caption: "Market research" },
-              { src: "/assets/bbs-team-1.jpg", caption: "Team case study" },
-            ].map((g) => (
-              <figure key={g.src} className="group relative overflow-hidden rounded-3xl ring-1 ring-gray-200">
-                <img src={g.src} alt={g.caption} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-sm text-white">{g.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* CTA */}
       <section className="relative bg-gradient-to-br from-[#0E71B9] to-[#0e4a7f] py-16 text-white sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
