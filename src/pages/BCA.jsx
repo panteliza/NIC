@@ -100,7 +100,7 @@ export default function BCA() {
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="/apply"
+                  href="/admission"
                   className="rounded-2xl bg-[#0E71B9] px-5 py-3 text-white shadow-lg shadow-blue-200 transition hover:brightness-110"
                 >
                   Apply Now

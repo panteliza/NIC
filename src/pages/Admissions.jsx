@@ -312,9 +312,6 @@ Submitted from: NIC Admission Page
               />
             </div>
 
-            <p className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-              I confirm the information provided is true and correct to the best of my knowledge.
-            </p>
 
             <div className="text-center space-y-2">
               <button
@@ -345,9 +342,7 @@ Submitted from: NIC Admission Page
                 </div>
               )}
 
-              <p className="text-xs text-slate-500">
-                Your email app (or Gmail) will open with all details prefilled.
-              </p>
+            
             </div>
           </form>
         </div>
