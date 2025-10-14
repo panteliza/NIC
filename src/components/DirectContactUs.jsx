@@ -9,14 +9,14 @@ const DirectContactUs = () => {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=nicnationalintegratedcollege@gmail.com&su=Direct Contact Request&body=
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=info@nic.edu.np&su=Direct Contact Request&body=
       Name: ${encodeURIComponent(data.name)}
       %0AEmail: ${encodeURIComponent(data.email)}
       %0APhone: ${encodeURIComponent(data.phone)}
       %0AAddress: ${encodeURIComponent(data.address)}
       %0ACourse: ${encodeURIComponent(data.course)}`;
 
-    const mailtoLink = `mailto:nicnationalintegratedcollege@gmail.com?subject=Direct Contact Request&body=
+    const mailtoLink = `mailto:info@nic.edu.np?subject=Direct Contact Request&body=
       Name: ${encodeURIComponent(data.name)}
       %0AEmail: ${encodeURIComponent(data.email)}
       %0APhone: ${encodeURIComponent(data.phone)}
