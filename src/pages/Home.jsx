@@ -6,7 +6,7 @@ import ServicesComponent from "../components/ServicesComponent";
 
 import AchievementSection from "../components/Achievements";
 import FAQComponent from '../components/FAQs';
-import BoardOfDirectors from "../components/BoardOfDirectors";
+
 import DirectContactUs from "../components/DirectContactUs";
 import Reviews from "../components/Reviews";
 import Footer from "../components/Footer";
@@ -83,7 +83,7 @@ const Home = () => {
         <ServicesComponent/>
             <AchievementSection />
             <FAQComponent/>
-            <BoardOfDirectors/>
+          
             <DirectContactUs/>
         
             <Reviews/>
