@@ -15,6 +15,7 @@ import AboutNIC from './pages/AboutNIC';
 import Admissions from './pages/Admissions';
 import Contact from './pages/Contact';
 import Programs from './pages/Programs';
+import BlogsTestimonials from './pages/BlogsTestimonials';
 
 
 
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/admission" element={<Admissions/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/programs" element={<Programs/>} />
+          <Route path="/student-life" element={<BlogsTestimonials/>} />
           
          
         
