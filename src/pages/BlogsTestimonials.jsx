@@ -266,11 +266,11 @@ function Hero() {
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
           <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
-            className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-cyan-100 via-white to-cyan-100 bg-clip-text text-transparent drop-shadow-[0_8px_28px_rgba(56,189,248,0.45)]">
+            className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-cyan-300 via-blue-500 to-cyan-100 bg-clip-text py-2 text-transparent drop-shadow-[0_8px_28px_rgba(56,189,248,0.45)]">
             Student Blogs & Testimonials
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-4 text-blue-100 text-lg max-w-2xl mx-auto">
+            className="mt-4 text-gray-700 text-lg max-w-2xl mx-auto">
             Stories, wins, and lessons from NIC students—captured in their own words.
           </motion.p>
         </div>
