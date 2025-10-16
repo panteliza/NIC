@@ -105,12 +105,7 @@ export default function BCA() {
                 >
                   Apply Now
                 </a>
-                <a
-                  href="/prospectus/bca"
-                  className="rounded-2xl border border-gray-300 px-5 py-3 text-gray-800 transition hover:bg-gray-50"
-                >
-                  Download Prospectus
-                </a>
+                
               </div>
             </motion.div>
 

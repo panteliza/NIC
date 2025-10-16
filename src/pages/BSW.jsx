@@ -78,7 +78,7 @@ export default function BSW() {
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="/admission" className="rounded-2xl bg-[#0E71B9] px-5 py-3 text-white shadow-lg shadow-blue-200 transition hover:brightness-110">Apply Now</a>
-                <a href="/prospectus/bsw" className="rounded-2xl border border-gray-300 px-5 py-3 text-gray-800 transition hover:bg-gray-50">Download Prospectus</a>
+               
               </div>
             </motion.div>
 
