@@ -57,9 +57,13 @@ export default function FooterNIC() {
                   <FaPhoneAlt className="mt-1 text-[#b0ff72]" />
                   <a href="tel:+977014234567" className="hover:text-white">01-4234567</a>
                 </li>
+                 <li className="flex items-start gap-2">
+                  <FaPhoneAlt className="mt-1 text-[#b0ff72]" />
+                  <a href="tel:+977014542722" className="hover:text-white">01-4542722</a>
+                </li>
                 <li className="flex items-start gap-2">
                   <MdEmail className="mt-1 text-[#b0ff72]" />
-                  <a href="mailto:info@nic.edu.np" className="hover:text-white">info@nic.edu.np</a>
+                  <a href="mailto:nicnationalintegratedcollege@gmail.com" className="hover:text-white">nicnationalintegratedcollege@gmail.com</a>
                 </li>
               </ul>
 

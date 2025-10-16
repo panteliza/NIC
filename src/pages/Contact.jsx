@@ -2,21 +2,19 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { MapPin, Phone, Mail, Navigation, Copy,} from "lucide-react";
-// ⬇️ Update this to your actual image file in /src/assets
-import NicMap from "../assets/map.png";
+import { MapPin, Phone, Mail, Copy } from "lucide-react";
 
 export default function Contact() {
-    useEffect(() => {
-            // Scroll to the top when the page loads
-            window.scrollTo(0, 0);
-          }, []);
+  useEffect(() => {
+    // Scroll to the top when the page loads
+    window.scrollTo(0, 0);
+  }, []);
+
   const addressText = "NIC, Dillibazar, Kathmandu 44600";
-  const phoneText = "01-4017603";
-  const emailText = "info@nic.edu.np";
- 
-  const mapsLink =
-    "https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=np&sa=X&geocode=KUGojDsIGes5MS5DLlArw3QK&daddr=Dilli+Bazar+Height+Marg,+Kathmandu+44600";
+  // ⬇️ Both phone numbers
+  const phonePrimary = "01-4017603";
+  const phoneSecondary = "01-4542722";
+  const emailText = "nicnationalintegratedcollege@gmail.com";
 
   const copy = async (txt) => {
     try {
@@ -28,7 +26,6 @@ export default function Contact() {
   };
 
   return (
-    
     <div className="min-h-screen flex flex-col bg-white text-slate-800 relative overflow-hidden">
       {/* Inline keyframes for animated hero background */}
       <style>{`
@@ -78,53 +75,50 @@ export default function Contact() {
           }}
         />
 
-       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-24 text-center">
-  {/* Deep royal glow behind heading */}
-  <div className="absolute inset-0 flex items-center justify-center -z-10 p-4">
-    <div className="w-[700px] h-[250px] bg-gradient-to-r from-[#00264d] via-[#003366] to-[#004080] blur-3xl opacity-50 rounded-full animate-pulse "></div>
-  </div>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-24 text-center">
+          {/* Deep royal glow behind heading */}
+          <div className="absolute inset-0 flex items-center justify-center -z-10 p-4">
+            <div className="w-[700px] h-[250px] bg-gradient-to-r from-[#00264d] via-[#003366] to-[#004080] blur-3xl opacity-50 rounded-full animate-pulse"></div>
+          </div>
 
-  {/* Royal gradient title */}
-  <h1
-    className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#003366] via-[#0059b3] to-[#0088cc] bg-clip-text text-transparent drop-shadow-[0_5px_25px_rgba(0,102,255,0.45)] animate-gradient-flow p-2"
-    style={{
-      backgroundSize: "300% 300%",
-      animation: "gradientFlow 8s ease-in-out infinite",
-    }}
-  >
-    Contact National Integrated College (NIC)
-  </h1>
+          {/* Royal gradient title */}
+          <h1
+            className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#003366] via-[#0059b3] to-[#0088cc] bg-clip-text text-transparent drop-shadow-[0_5px_25px_rgba(0,102,255,0.45)] animate-gradient-flow p-2"
+            style={{
+              backgroundSize: "300% 300%",
+              animation: "gradientFlow 8s ease-in-out infinite",
+            }}
+          >
+            Contact National Integrated College (NIC)
+          </h1>
 
-  {/* Subtext with elegant dark glow */}
-  <p
-    className="mt-4 text-lg sm:text-xl font-medium bg-gradient-to-r from-[#99ccff] via-[#66b3ff] to-[#3399ff] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,85,255,0.5)]"
-    style={{
-      backgroundSize: "300% 300%",
-      animation: "gradientFlow 10s linear infinite",
-    }}
-  >
-    We’re here to help with admissions, programs, scholarships, and campus visits.
-  </p>
+          {/* Subtext */}
+          <p
+            className="mt-4 text-lg sm:text-xl font-medium bg-gradient-to-r from-[#99ccff] via-[#66b3ff] to-[#3399ff] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,85,255,0.5)]"
+            style={{
+              backgroundSize: "300% 300%",
+              animation: "gradientFlow 10s linear infinite",
+            }}
+          >
+            We’re here to help with admissions, programs, scholarships, and campus visits.
+          </p>
 
-
-
-  {/* Keyframes */}
-  <style>
-    {`
-      @keyframes gradientFlow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-    `}
-  </style>
-</div>
-
+          {/* Keyframes */}
+          <style>
+            {`
+              @keyframes gradientFlow {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+            `}
+          </style>
+        </div>
       </section>
 
-      {/* ===== Contact Info + Map ===== */}
+      {/* ===== Contact Info (map removed) ===== */}
       <section className="-mt-12 mb-16 px-4">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
+        <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-8">
           {/* Contact Cards */}
           <div className="space-y-4">
             <InfoCard
@@ -132,69 +126,49 @@ export default function Contact() {
               title="Address"
               content={addressText}
               actions={[
-                {
-                  label: "Copy",
-                  onClick: () => copy(addressText),
-                  icon: <Copy className="w-4 h-4" />,
-                },
-                {
-                  as: "a",
-                  href: mapsLink,
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  label: "Directions",
-                  icon: <Navigation className="w-4 h-4" />,
-                },
+                { label: "Copy", onClick: () => copy(addressText), icon: <Copy className="w-4 h-4" /> },
+                // Directions link removed as requested
               ]}
             />
+
             <InfoCard
               icon={<Phone className="w-5 h-5" />}
               title="Phone"
-              content={phoneText}
+              content={
+                <div className="space-y-1">
+                  <div>{phonePrimary}</div>
+                  <div>{phoneSecondary}</div>
+                </div>
+              }
               actions={[
-                { as: "a", href: `tel:${phoneText.replaceAll(" ", "")}`, label: "Call", icon: <Phone className="w-4 h-4" /> },
-                { label: "Copy", onClick: () => copy(phoneText), icon: <Copy className="w-4 h-4" /> },
+                { as: "a", href: `tel:${phonePrimary.replaceAll(" ", "")}`, label: `Call ${phonePrimary}` },
+                { as: "a", href: `tel:${phoneSecondary.replaceAll(" ", "")}`, label: `Call ${phoneSecondary}` },
+                { label: "Copy both", onClick: () => copy(`${phonePrimary}, ${phoneSecondary}`), icon: <Copy className="w-4 h-4" /> },
               ]}
             />
+
             <InfoCard
               icon={<Mail className="w-5 h-5" />}
               title="Email"
               content={emailText}
               actions={[
-                { as: "a", href: `mailto:${emailText}`, label: "Email", icon: <Mail className="w-4 h-4" /> },
+                { as: "a", href: `mailto:${emailText}`, label: "Email" },
                 { label: "Copy", onClick: () => copy(emailText), icon: <Copy className="w-4 h-4" /> },
               ]}
             />
-           
           </div>
 
-          {/* Map Card — image that opens Google Maps */}
-          <a
-            href={mapsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5 bg-white"
-            title="Open in Google Maps"
-          >
-            <div className="relative">
-              <img
-                src={NicMap}
-                alt="Map to NIC, Dillibazar, Kathmandu"
-                className="w-full h-80 sm:h-[26rem] object-cover transition group-hover:scale-[1.02]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                <div className="space-y-1">
-                  <p className="text-sm uppercase tracking-wide text-white/80">Find Us</p>
-                  <h3 className="text-xl font-bold">NIC, Dillibazar • Kathmandu</h3>
-                </div>
-                <span className="inline-flex items-center gap-2 rounded-xl bg-white/15 backdrop-blur px-3 py-2 text-sm">
-                  <Navigation className="w-4 h-4" />
-                  Open in Maps
-                </span>
-              </div>
-            </div>
-          </a>
+          {/* Right column left intentionally simple now that map is removed */}
+          <div className="rounded-3xl bg-gradient-to-br from-sky-50 to-white border border-slate-200 p-6 shadow-lg">
+            <h3 className="text-xl font-semibold text-slate-900">Office Hours</h3>
+            <ul className="mt-3 text-slate-700 space-y-1">
+              <li>Sunday–Friday: 6:00 AM – 5:00 PM</li>
+              <li>Saturday: Closed</li>
+            </ul>
+            <p className="mt-4 text-slate-600">
+              For quick queries, call either number above. For admissions-related questions, please email us.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -228,7 +202,7 @@ function InfoCard({ icon, title, content, actions = [] }) {
         </div>
         <div className="w-full">
           <h3 className="font-semibold text-slate-900">{title}</h3>
-          <p className="mt-1 text-slate-600">{content}</p>
+          <div className="mt-1 text-slate-600">{content}</div>
           {actions.length > 0 && (
             <div className="mt-3 flex flex-wrap gap-2">
               {actions.map((a, i) =>
