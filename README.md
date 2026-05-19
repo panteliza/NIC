@@ -92,7 +92,22 @@ src/
 
 ## 📸 Preview
 
-<img width="1366" height="689" alt="Screenshot (1511)" src="https://github.com/user-attachments/assets/132c319e-256a-44a1-9e45-8075cde9eee7" />
+### Desktop
+<p align="center">
+  <img width="1366" alt="Screenshot (1511)" src="https://github.com/user-attachments/assets/132c319e-256a-44a1-9e45-8075cde9eee7" />
+</p>
+
+---
+
+### Mobile
+
+<p align="center">
+  <img width="250" alt="IMG_5518" src="https://github.com/user-attachments/assets/b2bac1d1-b2c2-4e72-9d78-818984603195" />
+  <img width="250" alt="IMG_5519" src="https://github.com/user-attachments/assets/fab6da0e-6a9d-4484-8190-44acdc23448d" />
+  <img width="250" alt="IMG_5520" src="https://github.com/user-attachments/assets/677118e8-22ad-498e-bfe5-78dae1510726" />
+</p>
+
+
 
 
 ---
